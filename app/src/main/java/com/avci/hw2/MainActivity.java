@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Item> items = new ArrayList<>();
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Hide Status Bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
 
 
         recyclerViewNews = findViewById(R.id.recyclerViewNews);

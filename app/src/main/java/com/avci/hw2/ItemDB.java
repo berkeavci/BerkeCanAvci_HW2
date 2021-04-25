@@ -102,16 +102,13 @@ public class ItemDB {
         contentValues.put(FIELD_CONTENT, Utility.htmlToText(item.getContent()));
         contentValues.put(FIELD_CATEGORIES, (new JSONArray(item.getCategories())).toString());
 
-        Log.d("SELAM ", "insert: " + contentValues);
+       // Log.d("SELAM ", "insert: " + contentValues);
         // Item Table Fill
         boolean res = dbHelper.insert(TABLE_NAME_ITEMS,contentValues);
 
         return res;
 
     }
-
-
-
 
     public static boolean delete(DatabaseHelper dbHelper, String title){
         Log.d("DATABASE OPERATIONS", "DELETE DONE");

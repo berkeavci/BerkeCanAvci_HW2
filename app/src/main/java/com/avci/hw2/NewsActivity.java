@@ -46,9 +46,9 @@ public class NewsActivity extends AppCompatActivity {
         addBtn = findViewById(R.id.addBtn);
         newsImage = findViewById(R.id.newsImage);
         frameLayout = findViewById(R.id.frameLayout);
-//        gl = new GestureListener(this);
-//        gDetector = new GestureDetectorCompat(this, gl);
-        //gDetector.setOnDoubleTapListener(gl);
+        NewsGestureListener ngl = new NewsGestureListener();
+        gDetector = new GestureDetectorCompat(this, ngl);
+
         // Intent Item Transfer
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
@@ -74,6 +74,13 @@ public class NewsActivity extends AppCompatActivity {
             }
         });
 
+        newsImage.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gDetector.onTouchEvent(event);
+            }
+        });
+
     }
 
 
@@ -81,7 +88,9 @@ public class NewsActivity extends AppCompatActivity {
 
         @Override
         public boolean onDoubleTapEvent(MotionEvent e) {
-            Toast.makeText(NewsActivity.this, "U have Invked Double Tap Eevent!", Toast.LENGTH_LONG).show();
+            Toast.makeText(NewsActivity.this, "U have Invoked Double Tap Event!", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(NewsActivity.this, MainActivity.class);
+            startActivity(intent);
             return true;
         }
     }

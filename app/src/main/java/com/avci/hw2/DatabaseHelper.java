@@ -62,7 +62,6 @@ public class DatabaseHelper extends  SQLiteOpenHelper {
         return db.insert(tableName, null, contentValues)>0;
     }
 
-
     public boolean delete(String tableName, String whereCondition) {
         Log.d("DATABASE OPERATIONS", "DELETE DONE");
         return db.delete(tableName, whereCondition, null)>0;
