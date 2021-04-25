@@ -1,28 +1,25 @@
 package com.avci.hw2;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class RssObject {
 
     public String status;
-    public ArrayList<Feed> feedList;
-    public ArrayList<Item> itemList;
+    public Feed feed;
+    public ArrayList<Item> items;
 
-    public RssObject(String status, ArrayList<Feed> feedList, ArrayList<Item> itemList) {
+    public RssObject(String status, Feed feed, ArrayList<Item> itemList) {
         this.status = status;
-        this.feedList = feedList;
-        this.itemList = itemList;
+        this.feed = feed;
+        this.items = itemList;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public ArrayList<Feed> getFeedList() {
-        return feedList;
-    }
-
-    public ArrayList<Item> getItemList() {
-        return itemList;
+    public RssObject(JSONObject obj) throws JSONException {
+        this.status = obj.getString("status");
+        this.feed = new Feed(obj.getJSONObject("feed"));
+        this.items = Item.fromJsonArray(obj.getJSONArray("items"));
     }
 }

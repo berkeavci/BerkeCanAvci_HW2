@@ -1,55 +1,40 @@
 package com.avci.hw2;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-
     RecyclerView recyclerViewNews;
     ImageButton searchBtn;
     EditText searchNews;
+    TextView textView;
+    DatabaseHelper dbHelper;
     LinearLayoutManager mLayoutManager;
-    RssObject rssObject;
 
-    private JSONArray news;
-    private JSONObject newsJSONObject;
-    private RequestQueue mRequestQueue;
+    RecyclerViewAdapter recyclerViewAdapter;
+    RssFeedDataManager rssFeedDataManager;
 
-    private ArrayList<Item> mArrayList;
-    String key;
-    public static final String TAG_BOOKS = "books";
-    public static final String TAG_NAME = "name";
-    public static final String TAG_AUTHOR = "author";
-    public static final String TAG_YEAR = "year";
-    public static final String TAG_IMG = "img";
+    ArrayList<Item> items = new ArrayList<>();
 
-    private static String NEWS_URL =  "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fcointelegraph.com%2Frss";
 
 
     @Override
@@ -59,81 +44,72 @@ public class MainActivity extends AppCompatActivity {
 
         // Hide Status Bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
 
-        // Declarations
+
 
         recyclerViewNews = findViewById(R.id.recyclerViewNews);
         searchBtn = findViewById(R.id.searchBtn);
         searchNews = findViewById(R.id.searchNews);
+        textView = findViewById(R.id.textView);
 
         mLayoutManager = new LinearLayoutManager(this);
         recyclerViewNews.setLayoutManager(mLayoutManager);
+        recyclerViewAdapter = new RecyclerViewAdapter(this, items);
+        recyclerViewNews.setAdapter(recyclerViewAdapter);
 
-        mRequestQueue = Volley.newRequestQueue(this);
+        rssFeedDataManager = new RssFeedDataManager(this);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.DEPRECATED_GET_OR_POST, NEWS_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            newsJSONObject = new JSONObject(response);
-                            new GetNews().execute();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
+
+
+        rssFeedDataManager.fetchRss(new RssFeedDataManager.OnResponse() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onSuccess(RssObject rssObject) {
+                recyclerViewAdapter.setRecyclerItemValues(rssObject.items);
+//                items.addAll(rssObject.items);
+//                recyclerViewAdapter.notifyDataSetChanged();
+            }
 
-            }
-        }){
-            // Use this to add parameters to request
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> params = new HashMap<String, String>();
-                params.put("findBook", key);
-                return params;
+            public void onError(VolleyError error) {
+                Toast.makeText(MainActivity.this, "cannot fetch error", Toast.LENGTH_SHORT).show();
             }
-        };
+        });
+
+
+        // Copy Database from the assests folder to data/data/database folder.
+        try {
+            String fileToDatabase = "/data/data/" + getPackageName() + "/databases/"+DatabaseHelper.DATABASE_NAME;
+            File file = new File(fileToDatabase);
+            File pathToDatabasesFolder = new File("/data/data/" + getPackageName() + "/databases/");
+            if (!file.exists()) {
+                pathToDatabasesFolder.mkdirs();
+                Log.d("BURDA", "BURDA");
+                CopyDB( getResources().getAssets().open(DatabaseHelper.DATABASE_NAME+".db"),
+                        new FileOutputStream(fileToDatabase));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dbHelper = new DatabaseHelper(this);
 
 
     }
 
-    private class GetNews extends AsyncTask<Void, Integer, Void> {
+    public void CopyDB(InputStream inputStream, OutputStream outputStream) throws IOException {
+        // Copy 1K bytes at a time
+        byte[] buffer = new byte[1024];
+        int length;
+        Log.d("BURDA", "BURDA2");
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
+        while ((length = inputStream.read(buffer)) > 0) {
+            outputStream.write(buffer, 0, length);
+            Log.d("BURDA", "BURDA3");
         }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-
-        }
-
-
-        // What do you want to do after doInBackground() finishes
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-
-            if (mArrayList != null) {
-            }
-            else
-                Toast.makeText(MainActivity.this, "Not Found", Toast.LENGTH_LONG).show();
-        }
+        inputStream.close();
+        outputStream.close();
     }
-
 
 
 

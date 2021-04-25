@@ -1,15 +1,20 @@
 package com.avci.hw2;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class Feed {
 
-    private String url;
-    private String title;
-    private String link;
-    private String description;
-    private String image;
+    public String url;
+    public String title;
+    public String link;
+    public String description;
+    public String image;
 
 
-    // Constructor
     public Feed(String url, String title, String link, String description, String image) {
         this.url = url;
         this.title = title;
@@ -18,25 +23,20 @@ public class Feed {
         this.image = image;
     }
 
-
-
-    public String getUrl() {
-        return url;
+    public Feed(JSONObject obj) throws JSONException {
+        this.url = obj.getString("url");
+        this.title = obj.getString("title");
+        this.link = obj.getString("link");
+        this.description = obj.getString("description");
+        this.image = obj.getString("image");
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getImage() {
-        return image;
-    }
+    // Parse JsonArray to Feed ArrayList
+//    static ArrayList<Feed> fromJsonArray(JSONArray array) throws JSONException {
+//        ArrayList<Feed> arrList = new ArrayList<>();
+//        for (int i = 0; i < array.length(); i++) {
+//            arrList.add(new Feed(array.getJSONObject(i)));
+//        }
+//        return arrList;
+//    }
 }

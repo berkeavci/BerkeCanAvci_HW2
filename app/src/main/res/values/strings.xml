@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BerkeCanAvci_HW2</string>
+    <string name="title">Title</string>
+    <string name="publication_date">Publication Date</string>
 </resources>
