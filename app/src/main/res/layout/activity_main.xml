@@ -9,26 +9,24 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewNews"
-        android:layout_width="373dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/searchNews" />
 
     <ImageButton
         android:id="@+id/searchBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="49dp"
-        android:layout_marginBottom="81dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewNews"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="31dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/searchNews"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
@@ -36,26 +34,40 @@
         android:id="@+id/searchNews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
         android:ems="12"
         android:hint="Search News"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/searchBtn"
-        app:layout_constraintEnd_toStartOf="@+id/searchBtn"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fav_news_websiteTV" />
+
+    <TextView
+        android:id="@+id/userTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="2dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/fav_news_websiteTV"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/fav_cryptoTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="67dp"
-        android:layout_marginTop="123dp"
-        android:layout_marginBottom="47dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewNews"
-        app:layout_constraintStart_toStartOf="@+id/searchNews"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fav_news_websiteTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="34dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerViewNews;
     ImageButton searchBtn;
     EditText searchNews;
-    TextView textView;
+    TextView userTV, fav_cryptoTV, fav_news_websiteTV;
     DatabaseHelper dbHelper;
     LinearLayoutManager mLayoutManager;
 
@@ -53,13 +53,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewNews = findViewById(R.id.recyclerViewNews);
         searchBtn = findViewById(R.id.searchBtn);
         searchNews = findViewById(R.id.searchNews);
-        textView = findViewById(R.id.textView);
+        userTV = findViewById(R.id.userTV);
+        fav_cryptoTV = findViewById(R.id.fav_cryptoTV);
+        fav_news_websiteTV = findViewById(R.id.fav_news_websiteTV);
         mLayoutManager = new LinearLayoutManager(this);
         recyclerViewNews.setLayoutManager(mLayoutManager);
         recyclerViewAdapter = new RecyclerViewAdapter(this, items);
         recyclerViewNews.setAdapter(recyclerViewAdapter);
 
         rssFeedDataManager = new RssFeedDataManager(this);
+
 
 
 

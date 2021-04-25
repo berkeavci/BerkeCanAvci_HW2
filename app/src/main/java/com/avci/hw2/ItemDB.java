@@ -36,10 +36,7 @@ public class ItemDB {
             FIELD_CATEGORIES + " TEXT)";
            // " PRIMARY KEY("+FIELD_GUID+"))";
 
-
     public static String DROP_TABLE_ITEMS_SQL = "DROP TABLE if exists "+ TABLE_NAME_ITEMS;
-
-
 
 
     public static ArrayList<Item>  getAllItem(DatabaseHelper dbHelper) throws JSONException {
@@ -91,7 +88,7 @@ public class ItemDB {
     }
 
     public static boolean insertItems(DatabaseHelper dbHelper, Item item) {
-        ContentValues contentValues = new ContentValues( );
+        ContentValues contentValues = new ContentValues();
         contentValues.put(FIELD_TITLE, item.getTitle());
         contentValues.put(FIELD_PUBDATE, item.getPubDate() );
         contentValues.put(FIELD_LINK, item.getLink());
@@ -102,13 +99,16 @@ public class ItemDB {
         contentValues.put(FIELD_CONTENT, Utility.htmlToText(item.getContent()));
         contentValues.put(FIELD_CATEGORIES, (new JSONArray(item.getCategories())).toString());
 
-       // Log.d("SELAM ", "insert: " + contentValues);
+        Log.d("SELAM ", "insert: " + contentValues);
         // Item Table Fill
         boolean res = dbHelper.insert(TABLE_NAME_ITEMS,contentValues);
 
         return res;
 
     }
+
+
+
 
     public static boolean delete(DatabaseHelper dbHelper, String title){
         Log.d("DATABASE OPERATIONS", "DELETE DONE");

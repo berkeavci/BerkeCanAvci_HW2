@@ -10,7 +10,7 @@ import android.util.Log;
 
 public class DatabaseHelper extends  SQLiteOpenHelper {
     public static String DATABASE_NAME="ItemDB";
-    public static int DATABASE_VERSION = 2;
+    public static int DATABASE_VERSION = 1;
 
     SQLiteDatabase db;
 

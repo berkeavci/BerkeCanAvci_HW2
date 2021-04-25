@@ -135,17 +135,17 @@ public class FeedHolderActivity extends AppCompatActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customDialog.hide();
+                customDialog.hide();  // ? Not Working
             }
         });
-
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean res = ItemDB.delete(dbHelper, savedNews.get(position).getTitle());
-
-            }
-        });
+// !!!!!!
+//        deleteButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                boolean res = ItemDB.delete(dbHelper, savedNews.get(position).getTitle());
+//
+//            }
+//        });
 
         customDialog.show();
 

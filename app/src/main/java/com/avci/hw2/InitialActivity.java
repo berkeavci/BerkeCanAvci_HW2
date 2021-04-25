@@ -71,6 +71,8 @@ public class InitialActivity extends AppCompatActivity {
             }
         });
 
+
+        // Here Not Working!
         submit_data_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +120,6 @@ public class InitialActivity extends AppCompatActivity {
             }
         });
 
-
         mainActBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,11 +128,7 @@ public class InitialActivity extends AppCompatActivity {
             }
         });
 
-
-
-
     }
-
 
     private String loadFileFromAssets() {
         String fileContent = null;

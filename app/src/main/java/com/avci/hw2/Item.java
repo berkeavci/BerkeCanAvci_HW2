@@ -59,6 +59,8 @@ public class Item implements Parcelable {
         categories = in.createStringArrayList();
     }
 
+
+
     public String getTitle() {
         return title;
     }
