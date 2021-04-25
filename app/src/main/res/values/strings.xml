@@ -2,4 +2,11 @@
     <string name="app_name">BerkeCanAvci_HW2</string>
     <string name="title">Title</string>
     <string name="publication_date">Publication Date</string>
+    <string name="dialog_info">Do You Want To Delete The Below Feed?</string>
+    <string name="back_feed">Back to Feed</string>
+    <string name="delete_text">Delete</string>
+    <string name="fav_crypto_tv">Type your favourite crypto</string>
+    <string name="username">Type your username</string>
+    <string name="fav_news_website">Type your favourite news website</string>
+    <string name="checkout">Checkout News!</string>
 </resources>

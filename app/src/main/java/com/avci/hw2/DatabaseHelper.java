@@ -10,7 +10,7 @@ import android.util.Log;
 
 public class DatabaseHelper extends  SQLiteOpenHelper {
     public static String DATABASE_NAME="ItemDB";
-    public static int DATABASE_VERSION = 1;
+    public static int DATABASE_VERSION = 2;
 
     SQLiteDatabase db;
 
@@ -24,12 +24,11 @@ public class DatabaseHelper extends  SQLiteOpenHelper {
         //onCreate called if database doesn't exist
         try {
             db.execSQL(ItemDB.CREATE_ITEM_TABLE_SQL);
-            db.execSQL(ItemDB.CREATE_CATEGORIES_TABLE_SQL);
-            // Initial Information Load to Database
-            for (String sqlToInsert:ItemDB.INSERT_RECORD_SQL_LIST) {
-                db.execSQL(sqlToInsert);
-            }
 
+            // Initial Information Load to Database
+//            for (String sqlToInsert:ItemDB.INSERT_RECORD_SQL_LIST) {
+//                db.execSQL(sqlToInsert);
+//            }b
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -42,7 +41,7 @@ public class DatabaseHelper extends  SQLiteOpenHelper {
         //SQLiteDatabase object used to execute SQL statements
         try {
             db.execSQL(ItemDB.DROP_TABLE_ITEMS_SQL);
-            db.execSQL(ItemDB.DROP_TABLE_CATEGORIES_SQL);
+
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -56,20 +55,13 @@ public class DatabaseHelper extends  SQLiteOpenHelper {
     }
     public Cursor getSomeRecords( String tableName, String[] columns,String whereCondition ){
         Cursor cursor = db.query(tableName, columns, whereCondition, null, null, null, null);
-        Log.d("DATABASE OPERATIONS", "GET SOME RECORDS WITH WHERE CLAUSE");
         return cursor;
     }
 
     public boolean insert(String tableName, ContentValues contentValues) {
-        Log.d("DATABASE OPERATIONS", "INSERT DONE");
         return db.insert(tableName, null, contentValues)>0;
     }
 
-    public boolean update(String tableName, ContentValues contentValues, String whereCondition) {
-        Log.d("DATABASE OPERATIONS", "UPDATE DONE");
-
-        return db.update(tableName, contentValues, whereCondition,null)>0;
-    }
 
     public boolean delete(String tableName, String whereCondition) {
         Log.d("DATABASE OPERATIONS", "DELETE DONE");

@@ -54,7 +54,7 @@ public class RssFeedDataManager {
 
 
     public interface OnResponse {
-        void onSuccess(RssObject rssObject);
+        void onSuccess(RssObject rssObject) throws JSONException;
         void onError(VolleyError error);
     }
 }

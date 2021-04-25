@@ -29,7 +29,6 @@ public class NewsActivity extends AppCompatActivity {
     ImageView newsImage;
     FrameLayout frameLayout;
     ImageReplacement ir;
-    GestureListener gl;
     private GestureDetectorCompat gDetector;
 
 
@@ -47,8 +46,8 @@ public class NewsActivity extends AppCompatActivity {
         addBtn = findViewById(R.id.addBtn);
         newsImage = findViewById(R.id.newsImage);
         frameLayout = findViewById(R.id.frameLayout);
-        gl = new GestureListener(this);
-        gDetector = new GestureDetectorCompat(this, gl);
+//        gl = new GestureListener(this);
+//        gDetector = new GestureDetectorCompat(this, gl);
         //gDetector.setOnDoubleTapListener(gl);
         // Intent Item Transfer
         Intent intent = getIntent();

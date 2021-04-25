@@ -21,6 +21,11 @@ public class Utility {
         return doc.body().text();
     }
 
+    static ArrayList<String> jsonToStringArrayList(String cat) throws JSONException {
+        JSONArray json = new JSONArray(cat);
+        return Utility.jsonToStringArrayList(json);
+    }
+
 
 
 }

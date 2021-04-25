@@ -10,16 +10,17 @@
         android:id="@+id/newsSpinner"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        app:srcCompat='@drawable/bitcoin_splash'
         android:layout_marginTop="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat='@drawable/bitcoin_splash' />
 
     <ImageView
         android:id="@+id/newsImageIV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:scaleType="fitXY"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="38dp"
         app:layout_constraintBottom_toTopOf="@+id/pubdateTV"
@@ -30,8 +31,8 @@
         android:id="@+id/pubdateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="340dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="350dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="52dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titTV" />
@@ -66,4 +67,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/abc_vector_test" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/articTV"
+        app:layout_constraintStart_toStartOf="@+id/articTV"
+        app:srcCompat="@android:drawable/ic_delete" />
 </androidx.constraintlayout.widget.ConstraintLayout>
