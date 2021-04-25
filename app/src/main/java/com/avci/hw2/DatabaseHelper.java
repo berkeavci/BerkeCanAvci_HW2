@@ -50,8 +50,8 @@ public class DatabaseHelper extends  SQLiteOpenHelper {
         Log.d("DATABASE OPERATIONS", "onUpgrade, table dropped and recreated. OldVersion:"+oldVersion+" NewVersion:"+newVersion);
     }
 
-    public Cursor getAllRecords(String tableName, String[] colums){
-        Cursor cursor = db.query(tableName, colums, null, null, null, null,null);
+    public Cursor getAllRecords(String tableName, String[] columns){
+        Cursor cursor = db.query(tableName, columns, null, null, null, null,null);
         return cursor;
     }
     public Cursor getSomeRecords( String tableName, String[] columns,String whereCondition ){

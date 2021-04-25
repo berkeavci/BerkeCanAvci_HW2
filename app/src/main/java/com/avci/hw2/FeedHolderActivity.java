@@ -7,11 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class FeedHolderActivity extends AppCompatActivity {
 
@@ -20,8 +23,11 @@ public class FeedHolderActivity extends AppCompatActivity {
     Spinner newsSpinner;
     Intent intent;
     Dialog customDialog;
+    Item savedNewsItem;
     ArrayList<Item> savedNews;
     ImageReplacement ir;
+    ImageButton MainActivityBtn;
+    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +39,17 @@ public class FeedHolderActivity extends AppCompatActivity {
         titTV = findViewById(R.id.titTV);
         articTV = findViewById(R.id.articTV);
         newsSpinner = findViewById(R.id.newsSpinner);
+        MainActivityBtn = findViewById(R.id.MainActivityBtn);
         savedNews = new ArrayList<>();
         ir = new ImageReplacement(this);
 
-        // Intent Retrieve Saved News
+        // Intent Retrieve Saved News - NewsActivity
         intent = getIntent();
         Bundle b = intent.getExtras();
-        savedNews = b.getParcelable("savedItems");
-
+        savedNewsItem = b.getParcelable("savedItems");
+        //Collections.addAll(savedNews, savedNewsItem);
+        ItemDB.insert(dbHelper, savedNewsItem);
+        savedNews = ItemDB.getAllItem(dbHelper);
         CustomSpinnerAdapter custAdapt = new CustomSpinnerAdapter(this, savedNews);
         newsSpinner.setAdapter(custAdapt);
 
@@ -56,6 +65,14 @@ public class FeedHolderActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        MainActivityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FeedHolderActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 

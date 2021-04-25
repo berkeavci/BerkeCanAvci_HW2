@@ -18,8 +18,7 @@ public class Utility {
 
     static String htmlToText(String text){
         Document doc = Jsoup.parse(text);
-        String article = doc.body().text();
-        return article;
+        return doc.body().text();
     }
 
 

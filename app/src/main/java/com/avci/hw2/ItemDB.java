@@ -47,8 +47,10 @@ public class ItemDB {
 
             add("INSERT INTO" + TABLE_NAME_CATEGORY + "(" +FIELD_AUTHOR+ ", "+FIELD_CATEGORIES+ ")" +
                 "values ("+
-                "'NFT trading cards: A new way to own collectibles or an asset bubble?,'" +
-                "{'NFT', 'Trading Cards'}"
+                "'Cointelegraph By António Madeira,'" +
+                "'NFT,'"+
+                "'Cointelegraph By António Madeira,'" +
+                "'Trading Cards"
                 );
         }
     };
@@ -121,15 +123,15 @@ public class ItemDB {
         return itemData;
     }
 
-    public static boolean insert(DatabaseHelper dbHelper, String title, String pubDate, String link, String author, String thumbnail, String description, String content, ArrayList<String> categories) {
+    public static boolean insert(DatabaseHelper dbHelper, Item item) {
         ContentValues contentValues = new ContentValues( );
-        contentValues.put(FIELD_TITLE, title);
-        contentValues.put(FIELD_PUBDATE, pubDate);
-        contentValues.put(FIELD_LINK, link);
-        contentValues.put(FIELD_GUID, author);
-        contentValues.put(FIELD_AUTHOR, thumbnail);
-        contentValues.put(FIELD_THUMBNAIL, description);
-        contentValues.put(FIELD_DESCRIPTION, content);
+        contentValues.put(FIELD_TITLE, item.getTitle());
+        contentValues.put(FIELD_PUBDATE, item.getPubDate() );
+        contentValues.put(FIELD_LINK, item.getLink());
+        contentValues.put(FIELD_GUID, item.getGuid());
+        contentValues.put(FIELD_AUTHOR, item.getAuthor());
+        contentValues.put(FIELD_THUMBNAIL, item.getThumbnail());
+        contentValues.put(FIELD_DESCRIPTION, item.getDescription());
 
         // Item Table Fill
         boolean res = dbHelper.insert(TABLE_NAME_ITEMS,contentValues);
@@ -137,9 +139,9 @@ public class ItemDB {
             return res;
         else {
             contentValues.clear();
-            for(int i = 0; i < categories.size(); i++){
-                contentValues.put(FIELD_TITLE, author);
-                contentValues.put(FIELD_CATEGORIES, categories.get(i));
+            for(int i = 0; i < item.getCategories().size(); i++){
+                contentValues.put(FIELD_AUTHOR, item.getAuthor());
+                contentValues.put(FIELD_CATEGORIES, item.getCategories().get(i));
 
             }
             return res;

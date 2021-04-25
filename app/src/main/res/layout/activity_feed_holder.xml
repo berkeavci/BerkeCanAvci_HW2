@@ -9,8 +9,9 @@
     <Spinner
         android:id="@+id/newsSpinner"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="37dp"
+        android:layout_height="100dp"
+        app:srcCompat='@drawable/bitcoin_splash'
+        android:layout_marginTop="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,10 +20,10 @@
         android:id="@+id/newsImageIV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="38dp"
+        app:layout_constraintBottom_toTopOf="@+id/pubdateTV"
         app:layout_constraintStart_toEndOf="@+id/pubdateTV"
-        app:layout_constraintTop_toBottomOf="@+id/newsSpinner"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -30,18 +31,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="340dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newsImageIV" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/titTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="96dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/articTV"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/articTV"
         app:layout_constraintTop_toBottomOf="@+id/pubdateTV" />
 
@@ -49,9 +51,19 @@
         android:id="@+id/articTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="104dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titTV" />
+
+    <ImageButton
+        android:id="@+id/MainActivityBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/abc_vector_test" />
 </androidx.constraintlayout.widget.ConstraintLayout>

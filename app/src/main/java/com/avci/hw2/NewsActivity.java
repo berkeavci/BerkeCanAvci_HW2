@@ -61,15 +61,12 @@ public class NewsActivity extends AppCompatActivity {
         titleTV.setText(selectedNewsItem.title);
         // Html Parse
         articleTV.setText(Utility.htmlToText(selectedNewsItem.content));
-//        Document doc = Jsoup.parse(selectedNewsItem.content);
-//        String article =  doc.body().text();
-//        articleTV.setText(article);
 
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(NewsActivity.this, FeedHolderActivity.class);
                 Bundle b = new Bundle();
                 b.putParcelable("savedItems", selectedNewsItem);
                 intent.putExtras(b);
