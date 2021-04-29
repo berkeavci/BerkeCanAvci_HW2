@@ -34,6 +34,7 @@ import java.util.ArrayList;
 public class InitialActivity extends AppCompatActivity {
 
     private JSONObject username_details;
+    DatabaseHelper db;
     private GestureDetectorCompat initialDetector;
     EditText userET, fav_cryptoET, fav_news_websiteET;
     Button mainActBtn, submit_data_btn;
@@ -55,6 +56,8 @@ public class InitialActivity extends AppCompatActivity {
         fav_news_websiteET = findViewById(R.id.fav_news_websiteET);
         mainActBtn = findViewById(R.id.mainActBtn);
         submit_data_btn = findViewById(R.id.submit_data_btn);
+        db = new DatabaseHelper(this);
+
         initial_constraint_layout = findViewById(R.id.initial_constraint_layout);
         initialGesture ig = new initialGesture();
         initialDetector = new GestureDetectorCompat(this, ig);

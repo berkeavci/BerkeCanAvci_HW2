@@ -23,6 +23,7 @@ public class DatabaseHelper extends  SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //onCreate called if database doesn't exist
         try {
+            db.execSQL(ItemDB.DROP_TABLE_ITEMS_SQL);
             db.execSQL(ItemDB.CREATE_ITEM_TABLE_SQL);
 
             // Initial Information Load to Database

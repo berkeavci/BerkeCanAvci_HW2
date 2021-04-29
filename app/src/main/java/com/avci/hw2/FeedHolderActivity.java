@@ -130,22 +130,24 @@ public class FeedHolderActivity extends AppCompatActivity {
 
         String content = Utility.htmlToText(savedNews.get(position).getContent());
         String result = savedNews.get(position).getAuthor() + "   " + savedNews.get(position).getCategories() + " " + content;
-        Log.d("RESULT HEREEEEEE", ": " + result);
         feedInfoTV.append(result);
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customDialog.hide();  // ? Not Working
+                customDialog.dismiss();
+                // ? Not Working
             }
         });
-// !!!!!!
-//        deleteButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                boolean res = ItemDB.delete(dbHelper, savedNews.get(position).getTitle());
-//
-//            }
-//        });
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean res = ItemDB.delete(dbHelper, savedNews.get(position).getTitle(), savedNews.get(position).getId());
+                if(res) {
+                    Toast.makeText(FeedHolderActivity.this, "News Deleted!", Toast.LENGTH_LONG).show();
+                    customDialog.dismiss();
+                }
+            }
+        });
 
         customDialog.show();
 

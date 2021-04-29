@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+        // Here onSuccess interface invoked to rssObject.items
         rssFeedDataManager.fetchRss(new RssFeedDataManager.OnResponse() {
             @Override
             public void onSuccess(RssObject rssObject) {
@@ -80,15 +80,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        String key;
-        key = searchNews.getText().toString();
+
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    ArrayList<Item> searchArrList = new ArrayList<>();
                 try {
+                    String key;
+                    key = searchNews.getText().toString();
+                    Log.d("Search News Key", "Key : " + key);
+                    ArrayList<Item> searchArrList = new ArrayList<>();
+                    searchArrList = null;
                     searchArrList.addAll(ItemDB.findNewsByTitle(dbHelper, key));
+                    Log.d("Array List inside", "AL : " + searchArrList.toString());
                     recyclerViewAdapter.setRecyclerItemValues(searchArrList);
                 } catch (JSONException e) {
                     e.printStackTrace();

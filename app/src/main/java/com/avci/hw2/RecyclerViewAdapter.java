@@ -30,6 +30,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void setRecyclerItemValues(ArrayList<Item> recyclerItemValues) {
         this.recyclerItemValues = recyclerItemValues;
         this.notifyDataSetChanged();
+        // as we sat arrayList, we nofity the change
     }
 
     @NonNull

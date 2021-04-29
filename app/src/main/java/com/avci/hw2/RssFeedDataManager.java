@@ -25,6 +25,7 @@ public class RssFeedDataManager {
         this.requestQueue = Volley.newRequestQueue(context);
     }
 
+    // Sends GET + URL and access the JSON Object - Interface to access it on MainActivity
     public void fetchRss(OnResponse callback) {
         StringRequest request = new StringRequest(
                 Request.Method.GET,

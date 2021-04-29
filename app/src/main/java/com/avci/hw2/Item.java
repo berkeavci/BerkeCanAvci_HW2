@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Item implements Parcelable {
-
+    public int id;
     public String title;
     public String pubDate;
     public String link;
@@ -22,7 +22,12 @@ public class Item implements Parcelable {
     public String content;
     public ArrayList<String> categories;
 
-    public Item(String title, String pubDate, String link, String guid, String author, String thumbnail, String description, String content, ArrayList<String> categories) {
+    public int getId() {
+        return id;
+    }
+
+    public Item(int id, String title, String pubDate, String link, String guid, String author, String thumbnail, String description, String content, ArrayList<String> categories) {
+        this.id = id;
         this.title = title;
         this.pubDate = pubDate;
         this.link = link;

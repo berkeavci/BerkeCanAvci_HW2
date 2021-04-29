@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class ItemDB {
     public static String TABLE_NAME_ITEMS ="items";
     public static String FIELD_TITLE = "title";
+    public static String FIELD_ID = "id";
     public static String FIELD_PUBDATE = "pubDate";
     public static String FIELD_LINK = "link";
     public static String FIELD_GUID = "guid";
@@ -25,6 +26,7 @@ public class ItemDB {
 
 
     public static String CREATE_ITEM_TABLE_SQL ="CREATE TABLE "+TABLE_NAME_ITEMS+"("+
+            FIELD_ID+" INTEGER, "+
             FIELD_TITLE+" TEXT, "+
             FIELD_PUBDATE+" TEXT, "+
             FIELD_LINK+" TEXT, "+
@@ -32,9 +34,9 @@ public class ItemDB {
             FIELD_AUTHOR+" TEXT, " +
             FIELD_THUMBNAIL+" TEXT, "+
             FIELD_DESCRIPTION+" TEXT, " +
-            FIELD_CONTENT+" TEXT," +
-            FIELD_CATEGORIES + " TEXT)";
-           // " PRIMARY KEY("+FIELD_GUID+"))";
+            FIELD_CONTENT+" TEXT, " +
+            FIELD_CATEGORIES + " TEXT, " +
+            "PRIMARY KEY("+FIELD_ID+" AUTOINCREMENT))";
 
     public static String DROP_TABLE_ITEMS_SQL = "DROP TABLE if exists "+ TABLE_NAME_ITEMS;
 
@@ -45,17 +47,19 @@ public class ItemDB {
 
         Cursor cursor = dbHelper.getAllRecords(TABLE_NAME_ITEMS, null);
         while(cursor.moveToNext()){
-            String title = cursor.getString(0);
-            String pubDate= cursor.getString(1);
-            String link= cursor.getString(2);
-            String guid= cursor.getString(3);
-            String author= cursor.getString(4);
-            String thumbnail= cursor.getString(5);
-            String description= cursor.getString(6);
-            String content= cursor.getString(7);
-            ArrayList<String> categories = Utility.jsonToStringArrayList(cursor.getString(8));
+            int id = cursor.getInt(0);
+            String title = cursor.getString(1);
+            String pubDate= cursor.getString(2);
+            String link= cursor.getString(3);
+            String guid= cursor.getString(4);
+            String author= cursor.getString(5);
+            String thumbnail= cursor.getString(6);
+            String description= cursor.getString(7);
+            String content= cursor.getString(8);
+            ArrayList<String> categories = Utility.jsonToStringArrayList(cursor.getString(9));
 
-            anItem = new Item(title, pubDate, link, guid, author, thumbnail, description, content, categories);
+            anItem = new Item(id, title, pubDate, link, guid, author, thumbnail, description, content, categories);
+            Log.d("Get All Items : ", "getAllItem: " + anItem.toString());
             itemData.add(anItem);
         }
 
@@ -65,22 +69,25 @@ public class ItemDB {
     public static ArrayList<Item> findNewsByTitle(DatabaseHelper dbHelper, String key) throws JSONException {
         Item anItem;
         ArrayList<Item> itemData = new ArrayList<>();
-        String where = FIELD_TITLE +" like '%"+key+"%'";
-
+        String where = FIELD_TITLE +" LIKE '%"+key+"%'";
+        Log.d("Where check : ", "findNewsByTitle: " + where);
         Cursor cursor = dbHelper.getSomeRecords(TABLE_NAME_ITEMS, null, where);
-        Log.d("DATABASE OPERATIONS",  where+", "+cursor.getCount()+",  "+cursor.getColumnCount());
+        Log.d("DATABASE OPERATIONS",  where+ ", " +cursor.getCount()+ ",  " + cursor.getColumnCount());
         while(cursor.moveToNext()){
-            String title = cursor.getString(0);
-            String pubDate= cursor.getString(1);
-            String link= cursor.getString(2);
-            String guid= cursor.getString(3);
-            String author= cursor.getString(4);
-            String thumbnail= cursor.getString(5);
-            String description= cursor.getString(6);
-            String content= cursor.getString(7);
-            ArrayList<String> categories = Utility.jsonToStringArrayList(cursor.getString(8));
+            int id = cursor.getInt(0);
+            String title = cursor.getString(1);
+            String pubDate= cursor.getString(2);
+            String link= cursor.getString(3);
+            String guid= cursor.getString(4);
+            String author= cursor.getString(5);
+            String thumbnail= cursor.getString(6);
+            String description= cursor.getString(7);
+            String content= cursor.getString(8);
+            ArrayList<String> categories = Utility.jsonToStringArrayList(cursor.getString(9));
 
-            anItem = new Item(title, pubDate, link, guid, author, thumbnail, description, content, categories);
+            anItem = new Item(id, title, pubDate, link, guid, author, thumbnail, description, content, categories);
+
+            Log.d("Get All Items : ", "findNewsByTitle: ");
             itemData.add(anItem);
         }
         //Log.d("DATABASE OPERATIONS",data.toString());
@@ -108,13 +115,10 @@ public class ItemDB {
     }
 
 
-
-
-    public static boolean delete(DatabaseHelper dbHelper, String title){
+    public static boolean delete(DatabaseHelper dbHelper, String title, int id){
         Log.d("DATABASE OPERATIONS", "DELETE DONE");
-        String where = FIELD_TITLE + " = "+title;
-        boolean res =  dbHelper.delete(TABLE_NAME_ITEMS, where);
-        return  res;
+        String where = FIELD_TITLE + " = " + title + " and id = " + id;
+        return dbHelper.delete(TABLE_NAME_ITEMS, where);
     }
 
 
