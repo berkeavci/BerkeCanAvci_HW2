@@ -1,4 +1,4 @@
-package com.avci.hw2;
+package com.avci.hw2.data;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.avci.hw2.data.entities.RssObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;

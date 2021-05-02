@@ -19,6 +19,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avci.hw2.adapters.CustomSpinnerAdapter;
+import com.avci.hw2.data.database.DatabaseHelper;
+import com.avci.hw2.data.ImageReplacement;
+import com.avci.hw2.data.database.ItemDB;
+import com.avci.hw2.data.Utility;
+import com.avci.hw2.data.entities.Item;
+
 import org.json.JSONException;
 
 import java.util.ArrayList;
@@ -31,13 +38,14 @@ public class FeedHolderActivity extends AppCompatActivity {
     TextView pubdateTV, titTV, articTV;
     Spinner newsSpinner;
     Intent intent;
-    Dialog customDialog;
+//    Dialog customDialog;
     Item savedNewsItem;
     ArrayList<Item> savedNews;
     ImageReplacement ir;
     ImageButton MainActivityBtn;
     DatabaseHelper dbHelper;
 
+    CustomSpinnerAdapter custAdapt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +70,15 @@ public class FeedHolderActivity extends AppCompatActivity {
         intent = getIntent();
         Bundle b = intent.getExtras();
         savedNewsItem = b.getParcelable("savedItems");
-        //Collections.addAll(savedNews, savedNewsItem);
+
         try {
             ItemDB.insertItems(dbHelper, savedNewsItem);
             savedNews = ItemDB.getAllItem(dbHelper);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        CustomSpinnerAdapter custAdapt = new CustomSpinnerAdapter(this, savedNews);
+
+        custAdapt = new CustomSpinnerAdapter(this, savedNews);
         newsSpinner.setAdapter(custAdapt);
 
         newsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -104,6 +113,42 @@ public class FeedHolderActivity extends AppCompatActivity {
         });
     }
 
+    public void dialogCreation(int position){
+        final Dialog customDialog = new Dialog(this);
+        customDialog.setContentView(R.layout.dialog_choice);
+
+        TextView feedInfoTV = customDialog.findViewById(R.id.feedInfoTV);
+        Button back_btn = customDialog.findViewById(R.id.back_btn);
+        Button deleteButton = customDialog.findViewById(R.id.deleteButton);
+
+        String content = Utility.htmlToText(savedNews.get(position).getContent());
+        String result = savedNews.get(position).getAuthor() + "   " + savedNews.get(position).getCategories() + " " + content;
+        feedInfoTV.append(result);
+
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customDialog.dismiss();
+                // TODO: Not Working
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = savedNews.get(position).getId();
+                boolean res = ItemDB.delete(dbHelper, id);
+                if(res) {
+                    Toast.makeText(FeedHolderActivity.this, "News Deleted!", Toast.LENGTH_LONG).show();
+                    custAdapt.deleteItem(id);
+                    customDialog.dismiss();
+                }
+            }
+        });
+
+        customDialog.show();
+
+    }
 
     class GestureFeedHolder extends GestureDetector.SimpleOnGestureListener{
         @Override
@@ -118,40 +163,5 @@ public class FeedHolderActivity extends AppCompatActivity {
             return true;
         }
     }
-
-    public void dialogCreation(int position){
-        customDialog = new Dialog(this);
-        customDialog.setContentView(R.layout.dialog_choice);
-
-        TextView feedInfoTV = customDialog.findViewById(R.id.feedInfoTV);
-        Button back_btn, deleteButton;
-        back_btn = customDialog.findViewById(R.id.back_btn);
-        deleteButton = customDialog.findViewById(R.id.deleteButton);
-
-        String content = Utility.htmlToText(savedNews.get(position).getContent());
-        String result = savedNews.get(position).getAuthor() + "   " + savedNews.get(position).getCategories() + " " + content;
-        feedInfoTV.append(result);
-        back_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                customDialog.dismiss();
-                // ? Not Working
-            }
-        });
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean res = ItemDB.delete(dbHelper, savedNews.get(position).getId());
-                if(res) {
-                    Toast.makeText(FeedHolderActivity.this, "News Deleted!", Toast.LENGTH_LONG).show();
-                    customDialog.dismiss();
-                }
-            }
-        });
-
-        customDialog.show();
-
-    }
-
 
 }

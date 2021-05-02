@@ -1,10 +1,7 @@
-package com.avci.hw2;
+package com.avci.hw2.data.entities;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class Feed {
 

@@ -1,10 +1,11 @@
-package com.avci.hw2;
+package com.avci.hw2.data.database;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.squareup.okhttp.internal.Util;
+import com.avci.hw2.data.Utility;
+import com.avci.hw2.data.entities.Item;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,8 +14,9 @@ import java.util.ArrayList;
 
 public class ItemDB {
     public static String TABLE_NAME_ITEMS ="items";
+
+    public static String FIELD_ID = "_id";
     public static String FIELD_TITLE = "title";
-    public static String FIELD_ID = "id";
     public static String FIELD_PUBDATE = "pubDate";
     public static String FIELD_LINK = "link";
     public static String FIELD_GUID = "guid";
@@ -69,10 +71,10 @@ public class ItemDB {
     public static ArrayList<Item> findNewsByTitle(DatabaseHelper dbHelper, String key) throws JSONException {
         Item anItem;
         ArrayList<Item> itemData = new ArrayList<>();
-        String where = FIELD_TITLE +" LIKE '%"+key+"%'";
-        Log.d("Where check : ", "findNewsByTitle: " + where);
-        Cursor cursor = dbHelper.getSomeRecords(TABLE_NAME_ITEMS, null, where);
-        Log.d("DATABASE OPERATIONS",  where+ ", " +cursor.getCount()+ ",  " + cursor.getColumnCount());
+
+        Cursor cursor = dbHelper.getSomeRecords(TABLE_NAME_ITEMS, null, FIELD_TITLE +" LIKE '%"+key+"%'");
+        Log.d("DATABASE",   cursor.getCount()+ " - " + cursor.getColumnCount());
+
         while(cursor.moveToNext()){
             int id = cursor.getInt(0);
             String title = cursor.getString(1);
@@ -87,7 +89,6 @@ public class ItemDB {
 
             anItem = new Item(id, title, pubDate, link, guid, author, thumbnail, description, content, categories);
 
-            Log.d("Get All Items : ", "findNewsByTitle: ");
             itemData.add(anItem);
         }
         //Log.d("DATABASE OPERATIONS",data.toString());
@@ -106,11 +107,9 @@ public class ItemDB {
         contentValues.put(FIELD_CONTENT, Utility.htmlToText(item.getContent()));
         contentValues.put(FIELD_CATEGORIES, (new JSONArray(item.getCategories())).toString());
 
-        Log.d("SELAM ", "insert: " + contentValues);
-        // Item Table Fill
-        boolean res = dbHelper.insert(TABLE_NAME_ITEMS,contentValues);
+        Log.d("DATABASE ", "insert: " + contentValues);
 
-        return res;
+        return dbHelper.insert(TABLE_NAME_ITEMS,contentValues);
 
     }
 
@@ -120,6 +119,4 @@ public class ItemDB {
         String where = FIELD_ID + " = " + id;
         return dbHelper.delete(TABLE_NAME_ITEMS, where);
     }
-
-
 }

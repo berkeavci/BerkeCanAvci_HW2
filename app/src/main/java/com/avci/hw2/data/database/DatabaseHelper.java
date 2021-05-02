@@ -1,4 +1,4 @@
-package com.avci.hw2;
+package com.avci.hw2.data.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -54,7 +54,7 @@ public class DatabaseHelper extends  SQLiteOpenHelper {
         Cursor cursor = db.query(tableName, columns, null, null, null, null,null);
         return cursor;
     }
-    public Cursor getSomeRecords( String tableName, String[] columns,String whereCondition ){
+    public Cursor getSomeRecords( String tableName, String[] columns, String whereCondition ){
         Cursor cursor = db.query(tableName, columns, whereCondition, null, null, null, null);
         return cursor;
     }

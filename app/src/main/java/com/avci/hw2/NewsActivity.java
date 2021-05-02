@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -16,9 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
+import com.avci.hw2.data.ImageReplacement;
+import com.avci.hw2.data.Utility;
+import com.avci.hw2.data.entities.Item;
 
 public class NewsActivity extends AppCompatActivity {
 

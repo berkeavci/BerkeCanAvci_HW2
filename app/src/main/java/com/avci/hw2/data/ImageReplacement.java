@@ -1,4 +1,4 @@
-package com.avci.hw2;
+package com.avci.hw2.data;
 
 import android.content.Context;
 import android.widget.ImageView;

@@ -1,13 +1,14 @@
-package com.avci.hw2;
+package com.avci.hw2.data.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.avci.hw2.data.Utility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Item implements Parcelable {

@@ -1,4 +1,4 @@
-package com.avci.hw2;
+package com.avci.hw2.data.entities;
 
 import org.json.JSONException;
 import org.json.JSONObject;

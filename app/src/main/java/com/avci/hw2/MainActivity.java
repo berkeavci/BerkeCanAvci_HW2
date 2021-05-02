@@ -15,30 +15,31 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.VolleyError;
+import com.avci.hw2.adapters.RecyclerViewAdapter;
+import com.avci.hw2.data.database.DatabaseHelper;
+import com.avci.hw2.data.database.ItemDB;
+import com.avci.hw2.data.RssFeedDataManager;
+import com.avci.hw2.data.entities.Item;
+import com.avci.hw2.data.entities.RssObject;
 
 import org.json.JSONException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerViewNews;
     ImageButton searchBtn;
     EditText searchNews;
-    TextView userTV, fav_cryptoTV, fav_news_websiteTV;
-    DatabaseHelper dbHelper;
+
+    Button refillButton;
+
     LinearLayoutManager mLayoutManager;
 
     RecyclerViewAdapter recyclerViewAdapter;
     RssFeedDataManager rssFeedDataManager;
+    DatabaseHelper dbHelper;
 
-    ArrayList<Item> items = new ArrayList<>();
+    RssObject rssObject;
 
 
     @Override
@@ -53,24 +54,24 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewNews = findViewById(R.id.recyclerViewNews);
         searchBtn = findViewById(R.id.searchBtn);
         searchNews = findViewById(R.id.searchNews);
-        userTV = findViewById(R.id.userTV);
-        fav_cryptoTV = findViewById(R.id.fav_cryptoTV);
-        fav_news_websiteTV = findViewById(R.id.fav_news_websiteTV);
+        refillButton = findViewById(R.id.refill_btn);
+
         mLayoutManager = new LinearLayoutManager(this);
         recyclerViewNews.setLayoutManager(mLayoutManager);
-        recyclerViewAdapter = new RecyclerViewAdapter(this, items);
+        recyclerViewAdapter = new RecyclerViewAdapter(this, new ArrayList<>());
         recyclerViewNews.setAdapter(recyclerViewAdapter);
 
         rssFeedDataManager = new RssFeedDataManager(this);
 
 
+        dbHelper = new DatabaseHelper(this);
 
         // Here onSuccess interface invoked to rssObject.items
         rssFeedDataManager.fetchRss(new RssFeedDataManager.OnResponse() {
             @Override
             public void onSuccess(RssObject rssObject) {
+                MainActivity.this.rssObject = rssObject;
                 recyclerViewAdapter.setRecyclerItemValues(rssObject.items);
-                recyclerViewAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -80,18 +81,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    String key;
-                    key = searchNews.getText().toString();
+                    String key = searchNews.getText().toString();
                     Log.d("Search News Key", "Key : " + key);
-                    ArrayList<Item> searchArrList = new ArrayList<>();
-                    searchArrList = null;
-                    searchArrList.addAll(ItemDB.findNewsByTitle(dbHelper, key));
+                    ArrayList<Item> searchArrList = ItemDB.findNewsByTitle(dbHelper, key);
                     Log.d("Array List inside", "AL : " + searchArrList.toString());
                     recyclerViewAdapter.setRecyclerItemValues(searchArrList);
                 } catch (JSONException e) {
@@ -101,42 +97,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Copy Database from the assests folder to data/data/database folder.
-//        try {
-//            String fileToDatabase = "/data/data/" + getPackageName() + "/databases/"+DatabaseHelper.DATABASE_NAME;
-//            File file = new File(fileToDatabase);
-//            File pathToDatabasesFolder = new File("/data/data/" + getPackageName() + "/databases/");
-//            if (!file.exists()) {
-//                pathToDatabasesFolder.mkdirs();
-//                Log.d("BURDA", "BURDA");
-//                CopyDB( getResources().getAssets().open(DatabaseHelper.DATABASE_NAME+".db"),
-//                        new FileOutputStream(fileToDatabase));
-//            }
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        dbHelper = new DatabaseHelper(this);
-
+        refillButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerViewAdapter.setRecyclerItemValues(rssObject.items);
+            }
+        });
 
     }
-
-//    public void CopyDB(InputStream inputStream, OutputStream outputStream) throws IOException {
-//        // Copy 1K bytes at a time
-//        byte[] buffer = new byte[1024];
-//        int length;
-//        Log.d("BURDA", "BURDA2");
-//
-//        while ((length = inputStream.read(buffer)) > 0) {
-//            outputStream.write(buffer, 0, length);
-//            Log.d("BURDA", "BURDA3");
-//        }
-//        inputStream.close();
-//        outputStream.close();
-//    }
-
-
-
 
 }

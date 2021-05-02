@@ -1,4 +1,4 @@
-package com.avci.hw2;
+package com.avci.hw2.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,13 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
+import com.avci.hw2.data.ImageReplacement;
+import com.avci.hw2.NewsActivity;
+import com.avci.hw2.R;
+import com.avci.hw2.data.entities.Item;
 
 import java.util.ArrayList;
 

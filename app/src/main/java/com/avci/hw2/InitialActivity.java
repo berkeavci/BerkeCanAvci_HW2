@@ -14,10 +14,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
+import com.avci.hw2.data.database.DatabaseHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,11 +24,9 @@ import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 public class InitialActivity extends AppCompatActivity {
 
@@ -186,6 +183,7 @@ public class InitialActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                dialogPrompt.dismiss();
                 startActivity(intent);
             }
         });

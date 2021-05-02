@@ -1,7 +1,6 @@
-package com.avci.hw2;
+package com.avci.hw2.adapters;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.avci.hw2.data.ImageReplacement;
+import com.avci.hw2.R;
+import com.avci.hw2.data.entities.Item;
 
 import java.util.ArrayList;
 
@@ -23,6 +26,16 @@ public class CustomSpinnerAdapter extends ArrayAdapter<Item> {
         super(context, R.layout.spinner_news_item, newsSpinner);
         this.context = context;
         this.newsSpinner = newsSpinner;
+    }
+
+    public void deleteItem(int id) {
+        for (Item item: newsSpinner) {
+            if (item.id == id) {
+                newsSpinner.remove(item);
+                notifyDataSetChanged();
+                return;
+            }
+        }
     }
 
     @NonNull
