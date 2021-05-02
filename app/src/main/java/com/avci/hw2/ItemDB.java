@@ -115,9 +115,9 @@ public class ItemDB {
     }
 
 
-    public static boolean delete(DatabaseHelper dbHelper, String title, int id){
+    public static boolean delete(DatabaseHelper dbHelper, int id){
         Log.d("DATABASE OPERATIONS", "DELETE DONE");
-        String where = FIELD_TITLE + " = " + title + " and id = " + id;
+        String where = FIELD_ID + " = " + id;
         return dbHelper.delete(TABLE_NAME_ITEMS, where);
     }
 

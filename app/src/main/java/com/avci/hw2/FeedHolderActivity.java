@@ -141,7 +141,7 @@ public class FeedHolderActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean res = ItemDB.delete(dbHelper, savedNews.get(position).getTitle(), savedNews.get(position).getId());
+                boolean res = ItemDB.delete(dbHelper, savedNews.get(position).getId());
                 if(res) {
                     Toast.makeText(FeedHolderActivity.this, "News Deleted!", Toast.LENGTH_LONG).show();
                     customDialog.dismiss();
