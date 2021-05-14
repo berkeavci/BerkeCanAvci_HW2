@@ -21,12 +21,15 @@ public class RssFeedDataManager {
     private static final String RSS_PARSER_URL = "https://api.rss2json.com/v1/api.json";
     private static final String FEED_URL = "https://cointelegraph.com/rss";
 
+
+
     public RssFeedDataManager(Context context) {
         this.context = context;
         this.requestQueue = Volley.newRequestQueue(context);
     }
 
     // Sends GET + URL and access the JSON Object - Interface to access it on MainActivity
+    // Json Data Acquire
     public void fetchRss(OnResponse callback) {
         StringRequest request = new StringRequest(
                 Request.Method.GET,
@@ -52,6 +55,7 @@ public class RssFeedDataManager {
         });
         requestQueue.getCache().clear();
         requestQueue.add(request);
+
     }
 
 

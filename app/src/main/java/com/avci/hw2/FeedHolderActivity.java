@@ -42,7 +42,7 @@ public class FeedHolderActivity extends AppCompatActivity {
     Item savedNewsItem;
     ArrayList<Item> savedNews;
     ImageReplacement ir;
-    ImageButton MainActivityBtn;
+    ImageButton MainActivityBtn, imageButton;
     DatabaseHelper dbHelper;
 
     CustomSpinnerAdapter custAdapt;
@@ -60,6 +60,7 @@ public class FeedHolderActivity extends AppCompatActivity {
         articTV = findViewById(R.id.articTV);
         newsSpinner = findViewById(R.id.newsSpinner);
         MainActivityBtn = findViewById(R.id.MainActivityBtn);
+        imageButton = findViewById(R.id.imageButton);
         GestureFeedHolder gfh = new GestureFeedHolder();
         feedDetector = new GestureDetectorCompat(this, gfh);
         dbHelper = new DatabaseHelper(this);
@@ -105,6 +106,13 @@ public class FeedHolderActivity extends AppCompatActivity {
             }
         });
 
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogCreation(pos);
+            }
+        });
+
         newsImageIV.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent motionEvent) {
@@ -141,6 +149,11 @@ public class FeedHolderActivity extends AppCompatActivity {
                 if(res) {
                     Toast.makeText(FeedHolderActivity.this, "News Deleted!", Toast.LENGTH_LONG).show();
                     custAdapt.deleteItem(id);
+                    pos =  newsSpinner.getSelectedItemPosition();
+                    ir.loadImage(savedNews.get(pos).getThumbnail(), newsImageIV);
+                    pubdateTV.setText(savedNews.get(pos).getPubDate());
+                    titTV.setText(savedNews.get(pos).getTitle());
+                    articTV.setText(Utility.htmlToText(savedNews.get(pos).getContent()));
                     customDialog.dismiss();
                 }
             }
@@ -151,10 +164,16 @@ public class FeedHolderActivity extends AppCompatActivity {
     }
 
     class GestureFeedHolder extends GestureDetector.SimpleOnGestureListener{
+
         @Override
         public boolean onDoubleTapEvent(MotionEvent e) {
-            Toast.makeText(FeedHolderActivity.this, "onDoubleTapEvent Over Image",Toast.LENGTH_LONG).show();
-            dialogCreation(pos);
+            boolean tapped = false;
+            super.onDoubleTapEvent(e);
+                // ?
+                Toast.makeText(FeedHolderActivity.this, "onDoubleTapEvent Over Image", Toast.LENGTH_LONG).show();
+                dialogCreation(pos);
+                tapped = true;
+
             return true;
         }
 

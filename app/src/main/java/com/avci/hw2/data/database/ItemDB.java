@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ItemDB {
     public static String TABLE_NAME_ITEMS ="items";
 
-    public static String FIELD_ID = "_id";
+    public static String FIELD_ID = "id";
     public static String FIELD_TITLE = "title";
     public static String FIELD_PUBDATE = "pubDate";
     public static String FIELD_LINK = "link";

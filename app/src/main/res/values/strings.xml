@@ -9,4 +9,7 @@
     <string name="username">Type your username</string>
     <string name="fav_news_website">Type your favourite news website</string>
     <string name="checkout">Checkout News!</string>
+    <string name="search_news_label">Search News</string>
+    <string name="coinname">CoinName</string>
+    <string name="coinprice">CoinPrice</string>
 </resources>

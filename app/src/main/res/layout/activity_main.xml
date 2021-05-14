@@ -10,31 +10,36 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewNews"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="600dp"
         android:layout_marginStart="19dp"
         android:layout_marginEnd="19dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_holder" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/search_holder"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="625dp"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_bottom"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.065">
 
-        <Button
-            android:id="@+id/refill_btn"
-            android:layout_width="41dp"
-            android:layout_height="49dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/searchNews"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!--        <Button-->
+        <!--            android:id="@+id/refill_btn"-->
+        <!--            android:layout_width="41dp"-->
+        <!--            android:layout_height="49dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/textInputLayout"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
 
         <ImageButton
@@ -46,21 +51,42 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
-        <EditText
-            android:id="@+id/searchNews"
-            android:layout_width="285dp"
-            android:layout_height="45dp"
-            android:layout_margin="5dp"
-            android:ems="12"
-            android:hint="Search News"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/searchBtn"
-            app:layout_constraintHorizontal_bias="0.859"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_news_label"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchNews"
+                android:layout_width="270dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="50dp"
+                android:ems="12"
+                android:inputType="textPersonName"
+                android:textColor="@color/material_on_background_disabled"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/searchBtn"
+                app:layout_constraintHorizontal_bias="0.859"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <fragment
+        android:id="@+id/fragment_bottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_holder">
+
+    </fragment>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

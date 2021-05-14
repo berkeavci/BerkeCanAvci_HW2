@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BerkeCanAvci_HW2">
+        <service
+            android:name=".BinanceService"
+            android:exported="false"></service>
         <activity android:name=".InitialActivity"></activity>
         <activity android:name=".SplashActivity">
             <intent-filter>

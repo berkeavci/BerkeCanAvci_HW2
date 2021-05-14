@@ -20,11 +20,11 @@
         android:id="@+id/newsImageIV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="38dp"
-        app:layout_constraintBottom_toTopOf="@+id/pubdateTV"
-        app:layout_constraintStart_toEndOf="@+id/pubdateTV"
+        android:foregroundGravity="center"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newsSpinner"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView

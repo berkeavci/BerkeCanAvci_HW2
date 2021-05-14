@@ -39,6 +39,7 @@ public class InitialActivity extends AppCompatActivity {
     private static final String FILE_NAME = "login.json";
     private String initialLogin;
     Dialog dialogPrompt;
+    boolean isEmpt = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,7 @@ public class InitialActivity extends AppCompatActivity {
         });
 
 
-        // Here Not Working!
+        // For Homework_2 just to show local Json, Further for Project
         submit_data_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,15 +84,24 @@ public class InitialActivity extends AppCompatActivity {
                 if(user.equals("") && fav_crypto.equals("") && fav_website.equals("")){
                     try {
                         username_details = new JSONObject(initialLogin);
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     for (int i = 0; i < initialLogin.length(); i++) {
                         Toast.makeText(InitialActivity.this, initialLogin.toString(),Toast.LENGTH_LONG).show();
                     }
+                    Log.d("DATA TRANSFER = > ", user + fav_crypto + fav_website);
                 }else{
-                    // File Definitions // under assets basically
+                    // Homework2_Part
+                    Intent intent = new Intent(InitialActivity.this, MainActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("user", user);
+                    b.putString("fav_crypto", fav_crypto);
+                    b.putString("fav_website", fav_website);
+                    intent.putExtras(b);
+                    isEmpt = true;
+                    startActivity(intent);
+                    //  File Definitions  under assets basically - BELOW IS PROJECT
                     FileWriter fileW;
                     BufferedWriter bufferedW;
                     username_details = new JSONObject();
@@ -159,8 +169,10 @@ public class InitialActivity extends AppCompatActivity {
 
         @Override
         public boolean onDoubleTapEvent(MotionEvent e) {
-            Intent intent = new Intent(getBaseContext(), MainActivity.class);
-            startActivity(intent);
+            if(!isEmpt) {
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(intent);
+            }
             return true;
         }
 
