@@ -21,6 +21,27 @@ public class Binance implements Parcelable {
         this.price = obj.getDouble("price");
     }
 
+    protected Binance(Parcel in) {
+        symbol = in.readString();
+        if (in.readByte() == 0) {
+            price = null;
+        } else {
+            price = in.readDouble();
+        }
+    }
+
+    public static final Creator<Binance> CREATOR = new Creator<Binance>() {
+        @Override
+        public Binance createFromParcel(Parcel in) {
+            return new Binance(in);
+        }
+
+        @Override
+        public Binance[] newArray(int size) {
+            return new Binance[size];
+        }
+    };
+
     public String getSymbol() {
         return symbol;
     }
@@ -38,7 +59,7 @@ public class Binance implements Parcelable {
     }
 
     @Override
-    public String  toString() {
+    public String toString() {
         return "Binance{" +
                 "symbol='" + symbol + '\'' +
                 ", price=" + price +
@@ -52,6 +73,12 @@ public class Binance implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(symbol);
+        if (price == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(price);
+        }
     }
 }

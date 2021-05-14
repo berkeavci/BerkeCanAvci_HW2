@@ -3,9 +3,11 @@ package com.avci.hw2;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,6 +26,7 @@ import java.net.MalformedURLException;
 public class BinanceService extends IntentService {
     private static final String BINANCE_API_URL = "https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT";
     private RequestQueue rq;
+    Handler handler;
 
     public BinanceService() {
         super("Service is Active");
@@ -31,7 +34,19 @@ public class BinanceService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        rq = Volley.newRequestQueue(this);
+        handler = new Handler(getMainLooper());
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                requestBinance(this);
+            }
+        });
+    }
+
+
+    public void requestBinance(Runnable runnable){
+        rq = Volley.newRequestQueue(BinanceService.this);
         StringRequest request = new StringRequest(Request.Method.GET, BINANCE_API_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -39,7 +54,7 @@ public class BinanceService extends IntentService {
                         try {
                             JSONObject obj = new JSONObject(response);
                             Binance binance = new Binance(obj);
-
+                            Log.d("JSONALDINKANKA", "NABER:" + binance.toString());
                             Intent broadcastIntent = new Intent();
                             Bundle b = new Bundle();
                             b.putParcelable("binanceInfo", binance);
@@ -48,6 +63,7 @@ public class BinanceService extends IntentService {
                             broadcastIntent.setAction("COIN_INFORMATION");
                             sendBroadcast(broadcastIntent);
 
+                            handler.postDelayed(runnable, 500);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -60,8 +76,5 @@ public class BinanceService extends IntentService {
         });
         rq.getCache().clear();
         rq.add(request);
-
-
-
     }
 }

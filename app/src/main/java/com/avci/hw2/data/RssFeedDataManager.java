@@ -21,8 +21,6 @@ public class RssFeedDataManager {
     private static final String RSS_PARSER_URL = "https://api.rss2json.com/v1/api.json";
     private static final String FEED_URL = "https://cointelegraph.com/rss";
 
-
-
     public RssFeedDataManager(Context context) {
         this.context = context;
         this.requestQueue = Volley.newRequestQueue(context);

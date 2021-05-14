@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fragment_bottom = (CoinFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_bottom);
-//         intent = new Intent(this, BinanceService.class);
-//         startService(intent);
-//         Toast.makeText(this, "After service start", Toast.LENGTH_LONG).show();
+        intent = new Intent(this, BinanceService.class);
+        startService(intent);
+         //Toast.makeText(this, "After service start", Toast.LENGTH_LONG).show();
 
         // Hide Status Bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -138,18 +138,19 @@ public class MainActivity extends AppCompatActivity {
             public void onReceive(Context context, Intent intent) {
                 Bundle b = intent.getExtras();
                 Binance bin = b.getParcelable("binanceInfo");
-                Toast.makeText(MainActivity.this, "BINANCE FILLED "+ bin.toString(), Toast.LENGTH_LONG).show();
-
+                //Toast.makeText(MainActivity.this, "BINANCE FILLED "+ bin.toString(), Toast.LENGTH_LONG).show();
+                Log.d("BROADCASTSERVICE", "BROADCAST!!!!" + bin.toString());
                 b.putParcelable("binanceInfo", bin);
-                fragment_bottom.setArguments(b);
+                fragment_bottom.binanceUpdate(bin);
+//                fragment_bottom.setArguments(b);
 
                 // Fragment
+//                FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment_bottom, fragment_bottom);
+//                fragmentTransaction.commit();
 
 
-                FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_bottom, fragment_bottom);
-                fragmentTransaction.commit();
             }
         };
 

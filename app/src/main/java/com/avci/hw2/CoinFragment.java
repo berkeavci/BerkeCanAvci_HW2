@@ -1,6 +1,6 @@
 package com.avci.hw2;
-
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +14,15 @@ import com.avci.hw2.data.entities.Binance;
 
 
 public class CoinFragment extends Fragment {
-
     TextView coin_name, coin_price;
 
     public CoinFragment() {
-
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -40,14 +39,16 @@ public class CoinFragment extends Fragment {
         coin_name = view.findViewById(R.id.coin_name);
         coin_price = view.findViewById(R.id.coin_price);
 
-        Binance bi = getArguments().getParcelable("binanceInfo");
+        coin_name.setText("BTC");
+        coin_name.setText("10");
 
-        coin_name.setText(bi.getSymbol()+"");
-        coin_price.setText(bi.getPrice()+"");
-
-        // String c_name = getArguments()
+         // String c_name = getArguments()
     }
 
+    public void binanceUpdate(Binance b){
+        coin_name.setText(b.getSymbol() + "");
+        coin_price.setText(b.getPrice() + "");
+    }
 
 
 }
