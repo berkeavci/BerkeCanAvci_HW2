@@ -31,20 +31,24 @@
         android:id="@+id/pubdateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="268dp"
+        android:layout_marginBottom="10dp"
         android:text="TextView"
+        android:textColor="@color/grey"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/titTV"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
         android:text="TextView"
+        android:textAppearance="?attr/textAppearanceHeadline5"
         app:layout_constraintEnd_toEndOf="@+id/articTV"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="@+id/articTV"
         app:layout_constraintTop_toBottomOf="@+id/pubdateTV" />
 
@@ -52,9 +56,11 @@
         android:id="@+id/articTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="96dp"
         android:text="TextView"
+        android:textAppearance="?attr/textAppearanceBody1"
+        android:textColor="@color/purple_700"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titTV" />
 
@@ -77,4 +83,14 @@
         app:layout_constraintEnd_toEndOf="@+id/articTV"
         app:layout_constraintStart_toStartOf="@+id/articTV"
         app:srcCompat="@android:drawable/ic_delete" />
+
+    <TextView
+        android:id="@+id/username_feed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="59dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/newsImageIV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newsSpinner" />
 </androidx.constraintlayout.widget.ConstraintLayout>

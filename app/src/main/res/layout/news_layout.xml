@@ -8,8 +8,8 @@
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="300dp"
-        android:layout_height="0dp"
+        android:layout_width="294dp"
+        android:layout_height="235dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="11dp"
         app:layout_constraintBottom_toTopOf="@+id/titleTV"
@@ -20,18 +20,20 @@
         <ImageView
             android:id="@+id/newsImage"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             tools:srcCompat="@tools:sample/avatars" />
     </FrameLayout>
 
     <TextView
         android:id="@+id/titleTV"
+        android:background="@drawable/rounded_corner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="61dp"
+        android:layout_marginBottom="40dp"
         android:ems="12"
         android:text="TextView"
+        android:textAppearance="?attr/textAppearanceHeadline6"
         app:layout_constraintBottom_toTopOf="@+id/articleTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,9 +41,10 @@
 
     <TextView
         android:id="@+id/articleTV"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginBottom="100dp"
+        android:layout_width="295dp"
+        android:layout_height="258dp"
+        android:layout_marginBottom="124dp"
+        android:background="@color/lightgrey"
         android:gravity="center"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,23 +53,41 @@
 
     <ImageButton
         android:id="@+id/addBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="53dp"
-        android:layout_marginBottom="17dp"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/ic_baseline_note_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:layout_constraintStart_toEndOf="@+id/rss_feed_btn" />
 
-    <TextView
-        android:id="@+id/notifyTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="20dp"
-        android:text="Click to Add Fee!"
-        android:textSize="20sp"
-        android:textColor="@color/purple_700"
+    <ImageButton
+        android:id="@+id/rss_feed_btn"
+        android:layout_width="0dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="300dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/ic_baseline_rss_feed_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addBtn" />
+        app:layout_constraintEnd_toStartOf="@+id/addBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/articleTV"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <fragment
+        android:id="@+id/fragment_bottom_news"
+        android:name="com.avci.hw2.CoinFragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+    </fragment>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

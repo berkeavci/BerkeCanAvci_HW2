@@ -2,18 +2,21 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/purple_200"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/coin_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="407dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/rounded_corner"
         android:text="@string/coinname"
-        android:textSize="20sp"
         android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,10 +24,24 @@
         android:id="@+id/coin_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
-        android:textSize="20sp"
+        android:layout_marginStart="148dp"
         android:text="@string/coinprice"
+        android:textSize="20sp"
+        android:textColor="@color/coin_color"
         app:layout_constraintBaseline_toBaselineOf="@+id/coin_name"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="37dp"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:text="@string/username_here"
+        app:layout_constraintBaseline_toBaselineOf="@+id/coin_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/coin_price" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

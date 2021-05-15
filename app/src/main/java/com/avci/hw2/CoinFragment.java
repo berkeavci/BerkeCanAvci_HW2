@@ -14,7 +14,7 @@ import com.avci.hw2.data.entities.Binance;
 
 
 public class CoinFragment extends Fragment {
-    TextView coin_name, coin_price;
+    TextView coin_name, coin_price, username;
 
     public CoinFragment() {
     }
@@ -38,16 +38,21 @@ public class CoinFragment extends Fragment {
 
         coin_name = view.findViewById(R.id.coin_name);
         coin_price = view.findViewById(R.id.coin_price);
+        username = view.findViewById(R.id.username);
 
         coin_name.setText("BTC");
         coin_name.setText("10");
+        username.setText("Username");
 
          // String c_name = getArguments()
     }
 
-    public void binanceUpdate(Binance b){
+    public void binanceUpdate(Binance b, String userN){
+        Log.d("Fragment Username", "UserNameM: ");
         coin_name.setText(b.getSymbol() + "");
         coin_price.setText(b.getPrice() + "");
+        username.setText(userN);
+
     }
 
 

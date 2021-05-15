@@ -35,7 +35,7 @@ public class FeedHolderActivity extends AppCompatActivity {
     static int pos = 0;
     private GestureDetectorCompat feedDetector;
     ImageView newsImageIV;
-    TextView pubdateTV, titTV, articTV;
+    TextView pubdateTV, titTV, articTV, username_feed;
     Spinner newsSpinner;
     Intent intent;
 //    Dialog customDialog;
@@ -61,6 +61,7 @@ public class FeedHolderActivity extends AppCompatActivity {
         newsSpinner = findViewById(R.id.newsSpinner);
         MainActivityBtn = findViewById(R.id.MainActivityBtn);
         imageButton = findViewById(R.id.imageButton);
+        username_feed = findViewById(R.id.username_feed);
         GestureFeedHolder gfh = new GestureFeedHolder();
         feedDetector = new GestureDetectorCompat(this, gfh);
         dbHelper = new DatabaseHelper(this);
@@ -70,10 +71,12 @@ public class FeedHolderActivity extends AppCompatActivity {
         // Intent Retrieve Saved News - NewsActivity
         intent = getIntent();
         Bundle b = intent.getExtras();
-        savedNewsItem = b.getParcelable("savedItems");
+        String username = b.getString("userName");
+        // Username Set
+        username_feed.setText(username);
 
         try {
-            ItemDB.insertItems(dbHelper, savedNewsItem);
+            //ItemDB.insertItems(dbHelper, savedNewsItem);
             savedNews = ItemDB.getAllItem(dbHelper);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -102,6 +105,9 @@ public class FeedHolderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FeedHolderActivity.this, MainActivity.class);
+                Bundle b = new Bundle();
+                b.putString("userName", username);
+                intent.putExtras(b);
                 startActivity(intent);
             }
         });

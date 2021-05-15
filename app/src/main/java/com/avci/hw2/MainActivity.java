@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -15,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GestureDetectorCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -44,9 +48,13 @@ public class MainActivity extends AppCompatActivity {
     RecyclerViewAdapter recyclerViewAdapter;
     RssFeedDataManager rssFeedDataManager;
     DatabaseHelper dbHelper;
-    RssObject rssObject;
+    ConstraintLayout mainActivity_layout;
     CoinFragment fragment_bottom;
     IntentFilter intentF;
+    private GestureDetectorCompat gDetector;
+    static String username="";
+    static RssObject rssObject;
+    boolean doubleTap = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,44 +62,50 @@ public class MainActivity extends AppCompatActivity {
         fragment_bottom = (CoinFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_bottom);
         intent = new Intent(this, BinanceService.class);
         startService(intent);
-         //Toast.makeText(this, "After service start", Toast.LENGTH_LONG).show();
 
         // Hide Status Bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         // Service
         intentF = new IntentFilter();
         intentF.addAction("COIN_INFORMATION");
         registerReceiver(broadcastreceiver, intentF);
 
+        // Reset Double Tap
+        doubleTap = false;
 
         recyclerViewNews = findViewById(R.id.recyclerViewNews);
         searchBtn = findViewById(R.id.searchBtn);
         searchNews = findViewById(R.id.searchNews);
+        mainActivity_layout = findViewById(R.id.mainActivity_layout);
 
+        // Gesture
+        MainActivity.MainGestureListener mgl = new MainActivity.MainGestureListener();
+        gDetector = new GestureDetectorCompat(this, mgl);
 
 
         //refillButton = findViewById(R.id.refill_btn);
         intent =  getIntent();
         Bundle b = intent.getExtras();
-        String user, fav_w, fav_c;
+        username = b.getString("userName");
+        Log.d("MainActivity Username", "UserNameM: "+username.toString());
 
-        if (b != null) {
-            user = b.getString("user");
-            fav_w = b.getString("fav_crypto");
-            fav_c = b.getString("fav_website");
-            Toast.makeText(this, "Information Of User: " + user + fav_w + fav_c + " ",  Toast.LENGTH_LONG).show();
-        }
+        searchBtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gDetector.onTouchEvent(event);
+            }
+        });
 
         mLayoutManager = new LinearLayoutManager(this);
         recyclerViewNews.setLayoutManager(mLayoutManager);
         recyclerViewAdapter = new RecyclerViewAdapter(this, new ArrayList<>());
         recyclerViewNews.setAdapter(recyclerViewAdapter);
-
         rssFeedDataManager = new RssFeedDataManager(this);
 
-
         dbHelper = new DatabaseHelper(this);
+
+
+
 
         // Here onSuccess interface invoked to rssObject.items
         rssFeedDataManager.fetchRss(new RssFeedDataManager.OnResponse() {
@@ -107,22 +121,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    String key = searchNews.getText().toString();
-                    Log.d("Search News Key", "Key : " + key);
-                    ArrayList<Item> searchArrList = ItemDB.findNewsByTitle(dbHelper, key);
-                    Log.d("Array List inside", "AL : " + searchArrList.toString());
-                    recyclerViewAdapter.setRecyclerItemValues(searchArrList);
+                    if(!doubleTap) {
+                        String key = searchNews.getText().toString();
+                        Log.d("Search News Key", "Key : " + key);
+                        ArrayList<Item> searchArrList = ItemDB.findNewsByTitle(dbHelper, key);
+                        Log.d("Array List inside", "AL : " + searchArrList.toString());
+                        recyclerViewAdapter.setRecyclerItemValues(searchArrList);
+                        doubleTap = false;
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
             }
         });
+
 
 //        refillButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -133,6 +150,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public static String getUsername() {
+        return username;
+    }
+
         BroadcastReceiver broadcastreceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -141,18 +162,22 @@ public class MainActivity extends AppCompatActivity {
                 //Toast.makeText(MainActivity.this, "BINANCE FILLED "+ bin.toString(), Toast.LENGTH_LONG).show();
                 Log.d("BROADCASTSERVICE", "BROADCAST!!!!" + bin.toString());
                 b.putParcelable("binanceInfo", bin);
-                fragment_bottom.binanceUpdate(bin);
-//                fragment_bottom.setArguments(b);
-
-                // Fragment
-//                FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_bottom, fragment_bottom);
-//                fragmentTransaction.commit();
-
-
+                fragment_bottom.binanceUpdate(bin, username);
             }
         };
+
+    class MainGestureListener extends GestureDetector.SimpleOnGestureListener{
+        @Override
+        public boolean onDoubleTapEvent(MotionEvent e) {
+            recyclerViewAdapter.setRecyclerItemValues(rssObject.items);
+            Log.d("DOUBLETAPLANDI", "onDoubleTapEvent: ");
+            doubleTap = false;
+            return super.onDoubleTapEvent(e);
+        }
+    }
+
+
+
 
 
 }

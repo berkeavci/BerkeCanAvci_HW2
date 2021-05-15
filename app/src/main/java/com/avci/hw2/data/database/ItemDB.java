@@ -91,7 +91,6 @@ public class ItemDB {
 
             itemData.add(anItem);
         }
-        //Log.d("DATABASE OPERATIONS",data.toString());
         return itemData;
     }
 

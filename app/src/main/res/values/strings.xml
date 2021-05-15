@@ -12,4 +12,6 @@
     <string name="search_news_label">Search News</string>
     <string name="coinname">CoinName</string>
     <string name="coinprice">CoinPrice</string>
+    <string name="type_your_password">Type Your Password</string>
+    <string name="username_here">UserName Here</string>
 </resources>

@@ -21,15 +21,11 @@ public class DatabaseHelper extends  SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //onCreate called if database doesn't exist
+
         try {
             db.execSQL(ItemDB.DROP_TABLE_ITEMS_SQL);
             db.execSQL(ItemDB.CREATE_ITEM_TABLE_SQL);
 
-            // Initial Information Load to Database
-//            for (String sqlToInsert:ItemDB.INSERT_RECORD_SQL_LIST) {
-//                db.execSQL(sqlToInsert);
-//            }b
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -38,8 +34,7 @@ public class DatabaseHelper extends  SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //onUpgrade called when DATABASE_VERSION is changed
-        //SQLiteDatabase object used to execute SQL statements
+
         try {
             db.execSQL(ItemDB.DROP_TABLE_ITEMS_SQL);
 

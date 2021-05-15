@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.avci.hw2.MainActivity;
 import com.avci.hw2.data.ImageReplacement;
 import com.avci.hw2.NewsActivity;
 import com.avci.hw2.R;
@@ -56,9 +57,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View view) {
                 // Goes to Second Activity
+                String userName = MainActivity.getUsername();
                 Intent intent = new Intent(context, NewsActivity.class);
                 Bundle b = new Bundle();
                 b.putParcelable("itemsKey", items); // Selected item list goes to news activity
+                b.putString("userName", userName);
                 intent.putExtras(b);
                 context.startActivity(intent);
             }

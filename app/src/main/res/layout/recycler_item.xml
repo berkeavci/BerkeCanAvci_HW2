@@ -20,7 +20,7 @@
             android:layout_width="80dp"
             android:layout_height="85dp"
             android:layout_margin="10dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="2dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,14 +29,15 @@
 
         <TextView
             android:id="@+id/tvItemsName"
-            android:layout_width="85dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="120dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:text="@string/title"
-            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textAppearance="?attr/textAppearanceBody1"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imgFeed"
@@ -48,11 +49,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="95dp"
-            android:layout_marginRight="37dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="80dp"
+            android:textColorHighlight="@color/grey"
+            android:text="@string/publication_date"
             android:textAppearance="?attr/textAppearanceBody2"
-
-            android:textColor="?android:attr/textColorSecondary"
-            android:text="@string/publication_date" />
+            android:textColor="@color/grey" />
 
     </com.google.android.material.card.MaterialCardView>
 

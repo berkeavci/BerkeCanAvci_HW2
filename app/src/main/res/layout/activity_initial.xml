@@ -7,79 +7,86 @@
     android:layout_height="match_parent"
     tools:context=".InitialActivity">
 
+
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="219dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginBottom="51dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/fav_news_websiteET"
+        android:layout_width="213dp"
+        android:layout_height="145dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginBottom="299dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/mainActBtn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bitcoin_splash" />
+        app:srcCompat="@drawable/bitcoin_splash"
+        tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/userET"
-        android:layout_width="302dp"
-        android:layout_height="52dp"
-        android:layout_marginBottom="18dp"
-        android:ems="10"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField1"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="273dp"
         android:hint="@string/username"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/fav_cryptoET"
-        app:layout_constraintEnd_toEndOf="@+id/fav_cryptoET"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/fav_news_websiteET"
-        app:layout_constraintTop_toBottomOf="@+id/fav_news_websiteET" />
-
-    <EditText
-        android:id="@+id/fav_cryptoET"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="273dp"
-        android:ems="10"
-        android:hint="@string/fav_crypto_tv"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/mainActBtn"
-        app:layout_constraintEnd_toEndOf="@+id/fav_news_websiteET"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/fav_news_websiteET"
-        app:layout_constraintTop_toBottomOf="@+id/userET" />
-
-    <EditText
-        android:id="@+id/fav_news_websiteET"
-        android:layout_width="302dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="9dp"
-        android:ems="10"
-        android:hint="@string/fav_news_website"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/userET"
+        app:layout_constraintBottom_toTopOf="@+id/textField"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/ic_baseline_rss_feed_24"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userET"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="300dp"
+        android:hint="@string/type_your_password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textField1"
+        app:startIconDrawable="@drawable/baseline_password_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userPw"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:inputType="textPassword"
+            tools:layout_editor_absoluteX="48dp"
+            tools:layout_editor_absoluteY="32dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/mainActBtn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="164dp"
         android:gravity="center"
         android:text="@string/checkout"
+        android:textColor="@color/grey"
+        app:icon="@drawable/ic_baseline_near_me_24"
+        app:iconTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fav_cryptoET" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:strokeColor="@color/grey" />
 
-    <Button
-        android:id="@+id/submit_data_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="50dp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="@+id/fav_cryptoET"
-        app:layout_constraintTop_toBottomOf="@+id/fav_cryptoET" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

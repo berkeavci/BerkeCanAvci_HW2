@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/mainActivity_layout"
     tools:context=".MainActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewNews"
-        android:layout_width="0dp"
-        android:layout_height="600dp"
+        android:layout_width="372dp"
+        android:layout_height="627dp"
         android:layout_marginStart="19dp"
         android:layout_marginEnd="19dp"
         app:layout_constraintBottom_toTopOf="@+id/fragment_bottom"
@@ -20,8 +21,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/search_holder"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="406dp"
+        android:layout_height="70dp"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="625dp"
         app:layout_constraintBottom_toTopOf="@+id/fragment_bottom"
@@ -53,16 +54,16 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="352dp"
+            android:layout_height="66dp"
             android:hint="@string/search_news_label"
             tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/searchNews"
-                android:layout_width="270dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="50dp"
+                android:layout_width="340dp"
+                android:layout_height="66dp"
                 android:ems="12"
                 android:inputType="textPersonName"
                 android:textColor="@color/material_on_background_disabled"

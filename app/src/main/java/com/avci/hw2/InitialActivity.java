@@ -33,11 +33,10 @@ public class InitialActivity extends AppCompatActivity {
     private JSONObject username_details;
     DatabaseHelper db;
     private GestureDetectorCompat initialDetector;
-    EditText userET, fav_cryptoET, fav_news_websiteET;
+    EditText userET, userPw;
     Button mainActBtn, submit_data_btn;
     ConstraintLayout initial_constraint_layout;
-    private static final String FILE_NAME = "login.json";
-    private String initialLogin;
+    Intent intent;
     Dialog dialogPrompt;
     boolean isEmpt = true;
 
@@ -50,20 +49,14 @@ public class InitialActivity extends AppCompatActivity {
 
         // Declarations
         userET = findViewById(R.id.userET);
-        fav_cryptoET = findViewById(R.id.fav_cryptoET);
-        fav_news_websiteET = findViewById(R.id.fav_news_websiteET);
+        userPw = findViewById(R.id.userPw);
         mainActBtn = findViewById(R.id.mainActBtn);
-        submit_data_btn = findViewById(R.id.submit_data_btn);
         db = new DatabaseHelper(this);
 
         initial_constraint_layout = findViewById(R.id.initial_constraint_layout);
         initialGesture ig = new initialGesture();
         initialDetector = new GestureDetectorCompat(this, ig);
 
-        initialLogin = loadFileFromAssets();
-
-
-        File file = new File(this.getFilesDir(), FILE_NAME); // File def
 
         initial_constraint_layout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -73,92 +66,26 @@ public class InitialActivity extends AppCompatActivity {
         });
 
 
-        // For Homework_2 just to show local Json, Further for Project
-        submit_data_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String user = userET.getText().toString();
-                String fav_crypto = fav_cryptoET.getText().toString();
-                String fav_website = fav_news_websiteET.getText().toString();
-
-                if(user.equals("") && fav_crypto.equals("") && fav_website.equals("")){
-                    try {
-                        username_details = new JSONObject(initialLogin);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    for (int i = 0; i < initialLogin.length(); i++) {
-                        Toast.makeText(InitialActivity.this, initialLogin.toString(),Toast.LENGTH_LONG).show();
-                    }
-                    Log.d("DATA TRANSFER = > ", user + fav_crypto + fav_website);
-                }else{
-                    // Homework2_Part
-                    Intent intent = new Intent(InitialActivity.this, MainActivity.class);
-                    Bundle b = new Bundle();
-                    b.putString("user", user);
-                    b.putString("fav_crypto", fav_crypto);
-                    b.putString("fav_website", fav_website);
-                    intent.putExtras(b);
-                    isEmpt = true;
-                    startActivity(intent);
-                    //  File Definitions  under assets basically - BELOW IS PROJECT
-                    FileWriter fileW;
-                    BufferedWriter bufferedW;
-                    username_details = new JSONObject();
-
-                    JSONArray newUserInfo = new JSONArray();
-                    newUserInfo.put(user);
-                    newUserInfo.put(fav_crypto);
-                    newUserInfo.put(fav_website);
-                    Log.d("Hello First!", newUserInfo+"");
-                    try {
-                        username_details.put("username", newUserInfo);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    try {
-                        fileW = new FileWriter(file.getAbsoluteFile());
-                        bufferedW = new BufferedWriter(fileW);
-                        Log.d("\n\n\nHello", username_details+"");
-                        bufferedW.write(username_details.toString());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-        });
 
         mainActBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(InitialActivity.this, MainActivity.class);
-                startActivity(intent);
+                String user = userET.getText().toString();
+                Log.d("InitialUsername", "onClick: "+user);
+                if(!user.equals("")){
+                    intent = new Intent(InitialActivity.this, MainActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("userName", user);
+                    intent.putExtras(b);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(InitialActivity.this, "Input Please!", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
     }
 
-    private String loadFileFromAssets() {
-        String fileContent = null;
-        try {
-            InputStream is = getBaseContext().getAssets().open(FILE_NAME);
-
-            int size = is.available();
-            byte[] buffer = new byte[size];
-
-            is.read(buffer);
-            is.close();
-
-            fileContent = new String(buffer, "UTF-8");
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return fileContent;
-    }
 
     class initialGesture extends GestureDetector.SimpleOnGestureListener{
         @Override

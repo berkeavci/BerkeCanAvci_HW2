@@ -44,7 +44,6 @@ public class BinanceService extends IntentService {
         });
     }
 
-
     public void requestBinance(Runnable runnable){
         rq = Volley.newRequestQueue(BinanceService.this);
         StringRequest request = new StringRequest(Request.Method.GET, BINANCE_API_URL,
@@ -54,7 +53,6 @@ public class BinanceService extends IntentService {
                         try {
                             JSONObject obj = new JSONObject(response);
                             Binance binance = new Binance(obj);
-                            Log.d("JSONALDINKANKA", "NABER:" + binance.toString());
                             Intent broadcastIntent = new Intent();
                             Bundle b = new Bundle();
                             b.putParcelable("binanceInfo", binance);
@@ -63,7 +61,7 @@ public class BinanceService extends IntentService {
                             broadcastIntent.setAction("COIN_INFORMATION");
                             sendBroadcast(broadcastIntent);
 
-                            handler.postDelayed(runnable, 500);
+                            handler.postDelayed(runnable, 600);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
