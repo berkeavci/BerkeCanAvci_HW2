@@ -1,4 +1,4 @@
-package com.avci.hw2;
+package com.avci.coinhouse;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
@@ -6,7 +6,6 @@ import androidx.core.view.GestureDetectorCompat;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,12 +18,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.avci.hw2.adapters.CustomSpinnerAdapter;
-import com.avci.hw2.data.database.DatabaseHelper;
-import com.avci.hw2.data.ImageReplacement;
-import com.avci.hw2.data.database.ItemDB;
-import com.avci.hw2.data.Utility;
-import com.avci.hw2.data.entities.Item;
+import com.avci.coinhouse.adapters.CustomSpinnerAdapter;
+import com.avci.coinhouse.data.database.DatabaseHelper;
+import com.avci.coinhouse.data.ImageReplacement;
+import com.avci.coinhouse.data.database.ItemDB;
+import com.avci.coinhouse.data.Utility;
+import com.avci.coinhouse.data.entities.Item;
 
 import org.json.JSONException;
 
@@ -38,7 +37,6 @@ public class FeedHolderActivity extends AppCompatActivity {
     TextView pubdateTV, titTV, articTV, username_feed;
     Spinner newsSpinner;
     Intent intent;
-//    Dialog customDialog;
     Item savedNewsItem;
     ArrayList<Item> savedNews;
     ImageReplacement ir;
@@ -46,7 +44,6 @@ public class FeedHolderActivity extends AppCompatActivity {
     DatabaseHelper dbHelper;
 
     CustomSpinnerAdapter custAdapt;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

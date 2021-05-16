@@ -1,11 +1,10 @@
-package com.avci.hw2.data;
+package com.avci.coinhouse.data;
 import android.content.Context;
 import android.media.AudioAttributes;
-import android.media.AudioManager;
 import android.media.SoundPool;
 import android.util.Log;
 
-import com.avci.hw2.R;
+import com.avci.coinhouse.R;
 
 public class PlaySound {
 
@@ -30,7 +29,7 @@ public class PlaySound {
 
         add_btn_sound = soundpool.load(context, R.raw.add_btn_sound, 1);
 
-        soundpool.play(add_btn_sound, 1.0f, 1.0f, 0, 0, 1.5f);
+        soundpool.play(add_btn_sound, 5, 5, 1, 2, 1);
         Log.d("MUSIC", "SoundImplementation: " + soundpool.toString());
 
         return soundpool;

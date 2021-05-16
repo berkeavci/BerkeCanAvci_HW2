@@ -1,4 +1,4 @@
-package com.avci.hw2.data.entities;
+package com.avci.coinhouse.data.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;

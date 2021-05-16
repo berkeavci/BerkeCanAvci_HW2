@@ -1,4 +1,4 @@
-package com.avci.hw2.adapters;
+package com.avci.coinhouse.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,11 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.avci.hw2.MainActivity;
-import com.avci.hw2.data.ImageReplacement;
-import com.avci.hw2.NewsActivity;
-import com.avci.hw2.R;
-import com.avci.hw2.data.entities.Item;
+import com.avci.coinhouse.MainActivity;
+import com.avci.coinhouse.data.ImageReplacement;
+import com.avci.coinhouse.NewsActivity;
+import com.avci.coinhouse.R;
+import com.avci.coinhouse.data.entities.Item;
 
 import java.util.ArrayList;
 

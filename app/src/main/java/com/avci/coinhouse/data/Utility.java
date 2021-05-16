@@ -1,4 +1,4 @@
-package com.avci.hw2.data;
+package com.avci.coinhouse.data;
 
 import org.json.JSONArray;
 import org.json.JSONException;

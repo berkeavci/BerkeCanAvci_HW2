@@ -1,4 +1,4 @@
-package com.avci.hw2;
+package com.avci.coinhouse;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -7,21 +7,17 @@ import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.avci.hw2.data.entities.Binance;
+import com.avci.coinhouse.data.entities.Binance;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.net.MalformedURLException;
 
 public class BinanceService extends IntentService {
     private static final String BINANCE_API_URL = "https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT";

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BerkeCanAvci_HW2</string>
+    <string name="app_name">CoinHouse</string>
     <string name="title">Title</string>
     <string name="publication_date">Publication Date</string>
     <string name="dialog_info">Do You Want To Delete The Below Feed?</string>

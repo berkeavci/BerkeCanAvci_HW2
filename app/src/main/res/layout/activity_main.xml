@@ -51,19 +51,31 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
+        <ImageButton
+            android:id="@+id/refresh_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textInputLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.518"
+            app:srcCompat="@drawable/ic_baseline_refresh_24" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="352dp"
-            android:layout_height="66dp"
+            android:layout_width="267dp"
+            android:layout_height="65dp"
             android:hint="@string/search_news_label"
-            tools:ignore="MissingConstraints">
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="6dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/searchNews"
-                android:layout_width="340dp"
-                android:layout_height="66dp"
+                android:layout_width="wrap_content"
+                android:layout_height="59dp"
                 android:ems="12"
                 android:inputType="textPersonName"
                 android:textColor="@color/material_on_background_disabled"
@@ -80,7 +92,7 @@
 
     <fragment
         android:id="@+id/fragment_bottom"
-        android:name="com.avci.hw2.CoinFragment"
+        android:name="com.avci.coinhouse.CoinFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"

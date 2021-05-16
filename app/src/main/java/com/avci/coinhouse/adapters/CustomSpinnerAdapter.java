@@ -1,4 +1,4 @@
-package com.avci.hw2.adapters;
+package com.avci.coinhouse.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,9 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.avci.hw2.data.ImageReplacement;
-import com.avci.hw2.R;
-import com.avci.hw2.data.entities.Item;
+import com.avci.coinhouse.data.ImageReplacement;
+import com.avci.coinhouse.R;
+import com.avci.coinhouse.data.entities.Item;
 
 import java.util.ArrayList;
 

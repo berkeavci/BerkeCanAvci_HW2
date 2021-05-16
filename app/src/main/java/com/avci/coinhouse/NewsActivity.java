@@ -1,4 +1,4 @@
-package com.avci.hw2;
+package com.avci.coinhouse;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GestureDetectorCompat;
@@ -7,7 +7,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,21 +20,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.avci.hw2.data.ImageReplacement;
-import com.avci.hw2.data.PlaySound;
-import com.avci.hw2.data.Utility;
-import com.avci.hw2.data.database.DatabaseHelper;
-import com.avci.hw2.data.database.ItemDB;
-import com.avci.hw2.data.entities.Binance;
-import com.avci.hw2.data.entities.Item;
+import com.avci.coinhouse.data.ImageReplacement;
+import com.avci.coinhouse.data.PlaySound;
+import com.avci.coinhouse.data.Utility;
+import com.avci.coinhouse.data.database.DatabaseHelper;
+import com.avci.coinhouse.data.database.ItemDB;
+import com.avci.coinhouse.data.entities.Binance;
+import com.avci.coinhouse.data.entities.Item;
 
 public class NewsActivity extends AppCompatActivity {
 
     Intent intent;
     Item selectedNewsItem;
     TextView articleTV, titleTV;
-    ImageButton addBtn, rss_feed_btn;
-    ImageView newsImage;
+    ImageView newsImage, rss_feed_btn, addBtn;
     FrameLayout frameLayout;
     ImageReplacement ir;
     DatabaseHelper dbhelper;

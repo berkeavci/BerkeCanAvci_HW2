@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/addBtn"
         android:layout_width="0dp"
         android:layout_height="43dp"
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/rss_feed_btn" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/rss_feed_btn"
         android:layout_width="0dp"
         android:layout_height="34dp"
@@ -79,7 +79,7 @@
 
     <fragment
         android:id="@+id/fragment_bottom_news"
-        android:name="com.avci.hw2.CoinFragment"
+        android:name="com.avci.coinhouse.CoinFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"

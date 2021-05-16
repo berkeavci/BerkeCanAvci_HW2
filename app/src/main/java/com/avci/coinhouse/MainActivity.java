@@ -1,4 +1,4 @@
-package com.avci.hw2;
+package com.avci.coinhouse;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -13,26 +13,23 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GestureDetectorCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.VolleyError;
-import com.avci.hw2.adapters.RecyclerViewAdapter;
-import com.avci.hw2.data.database.DatabaseHelper;
-import com.avci.hw2.data.database.ItemDB;
-import com.avci.hw2.data.RssFeedDataManager;
-import com.avci.hw2.data.entities.Binance;
-import com.avci.hw2.data.entities.Item;
-import com.avci.hw2.data.entities.RssObject;
+import com.avci.coinhouse.adapters.RecyclerViewAdapter;
+import com.avci.coinhouse.data.database.DatabaseHelper;
+import com.avci.coinhouse.data.database.ItemDB;
+import com.avci.coinhouse.data.RssFeedDataManager;
+import com.avci.coinhouse.data.entities.Binance;
+import com.avci.coinhouse.data.entities.Item;
+import com.avci.coinhouse.data.entities.RssObject;
 
 import org.json.JSONException;
 
@@ -41,9 +38,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerViewNews;
     ImageButton searchBtn;
+    ImageView refresh_btn;
     EditText searchNews;
     Intent intent;
-    Button refillButton;
     LinearLayoutManager mLayoutManager;
     RecyclerViewAdapter recyclerViewAdapter;
     RssFeedDataManager rssFeedDataManager;
@@ -53,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     IntentFilter intentF;
     private GestureDetectorCompat gDetector;
     static String username="";
-    static RssObject rssObject;
+    RssObject rssObject;
     boolean doubleTap = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         searchBtn = findViewById(R.id.searchBtn);
         searchNews = findViewById(R.id.searchNews);
         mainActivity_layout = findViewById(R.id.mainActivity_layout);
+        refresh_btn = findViewById(R.id.refresh_btn);
+
 
         // Gesture
         MainActivity.MainGestureListener mgl = new MainActivity.MainGestureListener();
@@ -103,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
         rssFeedDataManager = new RssFeedDataManager(this);
 
         dbHelper = new DatabaseHelper(this);
-
-
 
 
         // Here onSuccess interface invoked to rssObject.items
@@ -140,14 +137,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-//        refillButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                recyclerViewAdapter.setRecyclerItemValues(rssObject.items);
-//            }
-//        });
-
+        refresh_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerViewAdapter.setRecyclerItemValues(rssObject.items);
+            }
+        });
     }
 
     public static String getUsername() {

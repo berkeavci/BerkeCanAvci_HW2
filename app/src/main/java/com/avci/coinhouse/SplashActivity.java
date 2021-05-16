@@ -1,4 +1,4 @@
-package com.avci.hw2;
+package com.avci.coinhouse;
 
 import androidx.appcompat.app.AppCompatActivity;
 

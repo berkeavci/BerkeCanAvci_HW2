@@ -1,4 +1,4 @@
-package com.avci.hw2;
+package com.avci.coinhouse;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.avci.hw2.data.entities.Binance;
+import com.avci.coinhouse.data.entities.Binance;
 
 
 public class CoinFragment extends Fragment {
