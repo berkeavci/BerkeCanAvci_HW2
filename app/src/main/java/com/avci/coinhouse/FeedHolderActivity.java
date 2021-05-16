@@ -6,6 +6,7 @@ import androidx.core.view.GestureDetectorCompat;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -125,17 +126,18 @@ public class FeedHolderActivity extends AppCompatActivity {
     }
 
     public void dialogCreation(int position){
+
         final Dialog customDialog = new Dialog(this);
         customDialog.setContentView(R.layout.dialog_choice);
-
-        TextView feedInfoTV = customDialog.findViewById(R.id.feedInfoTV);
-        Button back_btn = customDialog.findViewById(R.id.back_btn);
-        Button deleteButton = customDialog.findViewById(R.id.deleteButton);
-
-        String content = Utility.htmlToText(savedNews.get(position).getContent());
-        String result = savedNews.get(position).getAuthor() + "   " + savedNews.get(position).getCategories() + " " + content;
-        feedInfoTV.append(result);
-
+        if(position >= 0) {
+            TextView feedInfoTV = customDialog.findViewById(R.id.feedInfoTV);
+            Button back_btn = customDialog.findViewById(R.id.back_btn);
+            Button deleteButton = customDialog.findViewById(R.id.deleteButton);
+            if(!savedNews.isEmpty()) {
+                String content = Utility.htmlToText(savedNews.get(position).getContent());
+                String result = savedNews.get(position).getAuthor() + "   " + savedNews.get(position).getCategories() + " " + content;
+                feedInfoTV.append(result);
+            }
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,18 +152,26 @@ public class FeedHolderActivity extends AppCompatActivity {
                 int id = savedNews.get(position).getId();
                 boolean res = ItemDB.delete(dbHelper, id);
                 if(res) {
+                    Log.d("POSITION", "onClick: " + pos);
                     Toast.makeText(FeedHolderActivity.this, "News Deleted!", Toast.LENGTH_LONG).show();
                     custAdapt.deleteItem(id);
-                    pos =  newsSpinner.getSelectedItemPosition();
-                    ir.loadImage(savedNews.get(pos).getThumbnail(), newsImageIV);
-                    pubdateTV.setText(savedNews.get(pos).getPubDate());
-                    titTV.setText(savedNews.get(pos).getTitle());
-                    articTV.setText(Utility.htmlToText(savedNews.get(pos).getContent()));
-                    customDialog.dismiss();
+                    if(!savedNews.isEmpty()) {
+                        pos = newsSpinner.getSelectedItemPosition();
+                        ir.loadImage(savedNews.get(pos).getThumbnail(), newsImageIV);
+                        pubdateTV.setText(savedNews.get(pos).getPubDate());
+                        titTV.setText(savedNews.get(pos).getTitle());
+                        articTV.setText(Utility.htmlToText(savedNews.get(pos).getContent()));
+                        customDialog.dismiss();
+                    }else{
+                        newsImageIV.setImageResource(R.drawable.bitcoin_splash);
+                        pubdateTV.setText("Default Time");
+                        titTV.setText("Defaul Title");
+                        articTV.setText("Defaul Article");
+                    }
                 }
             }
         });
-
+        }
         customDialog.show();
 
     }
@@ -170,12 +180,9 @@ public class FeedHolderActivity extends AppCompatActivity {
 
         @Override
         public boolean onDoubleTapEvent(MotionEvent e) {
-            boolean tapped = false;
             super.onDoubleTapEvent(e);
-                // ?
                 Toast.makeText(FeedHolderActivity.this, "onDoubleTapEvent Over Image", Toast.LENGTH_LONG).show();
                 dialogCreation(pos);
-                tapped = true;
 
             return true;
         }

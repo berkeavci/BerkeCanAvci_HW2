@@ -10,4 +10,5 @@
     <color name="lightgrey">#B7AEC3</color>
     <color name="grey">#344955</color>
     <color name="coin_color">#0ACCC5</color>
+    <color name="light_red">#e57373</color>
 </resources>

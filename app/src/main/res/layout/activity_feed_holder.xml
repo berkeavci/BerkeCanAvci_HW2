@@ -18,16 +18,19 @@
 
     <ImageView
         android:id="@+id/newsImageIV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="56dp"
         android:foregroundGravity="center"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/pubdateTV"
+        app:layout_constraintStart_toEndOf="@+id/username_feed"
         app:layout_constraintTop_toBottomOf="@+id/newsSpinner"
+        app:layout_constraintVertical_bias="0.533"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
+        android:background="@drawable/rounded_corner"
         android:id="@+id/pubdateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,53 +47,59 @@
         android:id="@+id/titTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded_corner"
         android:text="TextView"
         android:textAppearance="?attr/textAppearanceHeadline5"
         app:layout_constraintEnd_toEndOf="@+id/articTV"
-        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="@+id/articTV"
         app:layout_constraintTop_toBottomOf="@+id/pubdateTV" />
 
     <TextView
         android:id="@+id/articTV"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="96dp"
+        android:layout_height="270dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_corner"
         android:text="TextView"
         android:textAppearance="?attr/textAppearanceBody1"
-        android:textColor="@color/purple_700"
+        android:textColor="@color/light_red"
         app:layout_constraintStart_toStartOf="parent"
+        app:lineHeight="1dp"
         app:layout_constraintTop_toBottomOf="@+id/titTV" />
 
     <ImageButton
         android:id="@+id/MainActivityBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/articTV"
+        app:layout_constraintVertical_bias="0.666"
         app:srcCompat="@drawable/abc_vector_test" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/articTV"
         app:layout_constraintStart_toStartOf="@+id/articTV"
+        app:layout_constraintTop_toBottomOf="@+id/articTV"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@android:drawable/ic_delete" />
 
     <TextView
         android:id="@+id/username_feed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="59dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="60dp"
         android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/newsImageIV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newsSpinner" />
 </androidx.constraintlayout.widget.ConstraintLayout>
